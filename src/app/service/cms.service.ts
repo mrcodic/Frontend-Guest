@@ -22,8 +22,7 @@ import { HttpResponseBase } from '@angular/common/http';
 })
 
 export class CmsService extends ServicesBase {
-  backend:string="https://al-khaldi.com.sa/api/v1/";
-  // backend:string="http://localhost:8000/api/v1/";
+  backend:string="http://localhost:8000/api/v1/";
   constructor(injector: Injector, private router: Router) {
     super(injector);
   }

@@ -1,5 +1,5 @@
 {
-  "baseURL": "https://al-khaldi.com.sa/api/v1/",
-  "DevURL": "https://al-khaldi.com.sa/api/v1/",
+  "baseURL": "http://localhost:8000/api/v1/",
+  "DevURL": "http://localhost:8000/api/v1/",
   "ProductionURL": "https://al-khaldi.com.sa/api/v1/"
 }
