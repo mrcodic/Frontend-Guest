@@ -1,0 +1,17 @@
+<p-toast position="bottom-right"></p-toast>
+<div class="d-flex">
+  <h4 class="me-2">Image</h4>
+</div>
+<p-image
+  class="product-image w-full d-block mt-2"
+  [src]="image"
+  width="250"
+  *ngIf="image"
+  [preview]="true"
+></p-image>
+<app-input-form
+  [inputs]="inputs"
+  [formControlFromParent]="contactUsFormGroup"
+  (formSubmitted)="formSubmitted($event)"
+  [action]="action"
+></app-input-form>

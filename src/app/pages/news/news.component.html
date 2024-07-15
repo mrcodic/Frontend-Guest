@@ -1,0 +1,100 @@
+<div class="page__banner" data-background="assets/img/team/team-banner.jpg" style="background-image: url(assets/img/team/team-banner.jpg);">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="page__banner-content">
+                    <span>News</span>
+                    <ul>
+                        <li><a routerLink="/home">Home</a><span>|</span></li>
+                        <li>News</li>
+                    </ul>
+                    <h1>NEWS & EVENTS</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="news__standard section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-4 col-lg-4 order-last order-lg-first">
+                <div class="all__sidebar">
+                    <div class="all__sidebar-item">
+                        <h4>Filter</h4>
+                        <form [formGroup]="filterForm" (ngSubmit)="getfilteredblogs()" class="row">
+                          <div>
+
+                            <label for="dateFrom" class="col-4 col-form-label">Date From</label>
+
+                              <div class="input-group date" >
+
+                                <input (change)="catchDate()" formControlName="dateFrom" type="date" class="form-control" id="dateFrom" autocomplete="off"/>
+
+                                <!-- <span class="input-group-append">
+                                  <span class="input-group-text bg-light d-block">
+                                    <i class="fa fa-calendar"></i>
+                                  </span>
+                                </span> -->
+                              </div>
+                            </div>
+                            <div>
+
+                              <label for="dateTo" class="col-4 col-form-label">Date To</label>
+
+                              <div class="input-group date" >
+                                <input  (change)="catchDate()" formControlName="dateTo" type="date" class="form-control" id="dateTo" autocomplete="off"/>
+
+                                <!-- <span class="input-group-append">
+                                  <span class="input-group-text bg-light d-block">
+                                    <i class="fa fa-calendar"></i>
+                                  </span>
+                                </span> -->
+                              </div>
+                          </div>
+                           <button type="submit">
+                            filter
+                           </button>
+                          </form>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-8 col-lg-8 lg-mb-60 second-small">
+              <ng-container *ngIf="getDisplayedBlogs().length>0;else nodata">
+                      <div *ngFor="let item of getDisplayedBlogs()" class="news__standard-left-item mb-40" >
+                    <div class="news__standard-left-item-image">
+                        <a [routerLink]="['/news', item?._id]"><img [src]="item?.image" alt=""></a>
+                    </div>
+                    <div class="news__standard-left-item-content">
+                      <h3 class="mb-10"><a [routerLink]="['/news', item?._id]">{{ item.authorName }} {{ item.title }} {{ item.createdAt | date:'yyyy' }}</a></h3>
+                      <p>
+                        {{ item.brief?item.brief:'' }}
+                        </p>
+                    </div>
+                  </div>
+              </ng-container>
+
+
+
+                  <ng-template #nodata>
+                    <div class="news__standard-left-item mb-40 text-center" role="alert">
+                      <h4>No news & events found</h4>
+                    </div>
+                  </ng-template>
+
+                  <div class="theme__pagination" >
+                    <ul>
+                      <li *ngFor="let page of getPageNumbers()" [class.active]="page === currentPage">
+                        <a (click)="onPageChange(page)">{{ page }}</a>
+                      </li>
+                    </ul>
+                  </div>
+
+            </div>
+        </div>
+    </div>
+</div>

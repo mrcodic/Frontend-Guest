@@ -1,0 +1,12 @@
+<p-fileUpload
+  mode="basic"
+  accept="image/*"
+  styleClass="save-btn"
+  [multiple]="multiple"
+  [auto]="true"
+  [maxFileSize]="5242880"
+  [customUpload]="true"
+  [chooseLabel]="uploadBtn.label"
+  [chooseIcon]="uploadBtn.icon"
+  (uploadHandler)="uploadFile($event)"
+></p-fileUpload>

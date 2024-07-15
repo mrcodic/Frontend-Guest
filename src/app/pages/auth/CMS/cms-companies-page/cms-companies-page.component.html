@@ -1,0 +1,139 @@
+<p-toast position="top-right"></p-toast>
+<p-confirmDialog />
+<h6
+  class="my-3 py-2 text-left custom-border custom-border-right light-shadow pageTitle px-4"
+>
+  Edit {{ pageTitle }} Page
+</h6>
+<div class="d-flex justify-content-between"></div>
+<!-- !--------------------- -->
+<!-- * Header -->
+
+<p-tabView>
+  <!-- Added companies -->
+  <p-tabPanel header="Companies ">
+    <app-data-table
+  [isActions]="true"
+  [cols]="cols"
+  [data]="newCompanyData"
+  (actionClicked)="callAction($event)"
+   ></app-data-table>
+
+   <p-dialog
+  [(visible)]="display"
+  [dismissableMask]="true"
+  [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+  [style]="{ width: '50vw' }"
+  [header]="action + ' ' + pageTitle"
+>
+  <app-career-dialog-content
+    *ngIf="display"
+    [action]="action"
+    (closeDialog)="close()"
+  ></app-career-dialog-content>
+  </p-dialog>
+  </p-tabPanel>
+  <!-- Header From -->
+  <p-tabPanel header="Header ">
+    <form
+      *ngIf="header"
+      class=""
+      [formGroup]="companiesForm"
+      (ngSubmit)="onSubmit('companiesForm')"
+    >
+      <div class="my-4 custom-border py-3 custom-bg">
+        <!-- <h6 class="mb-2">header</h6> -->
+        <div class="container-fluid">
+          <div class="row">
+            <div class="companies-header d-flex gap-2">
+              <div class="w-50 d-flex flex-column">
+                <label for="label" class="me-2 fw-bold text-dark">
+                  Label
+                </label>
+                <input
+                  id=""
+                  pInputText
+                  type="text"
+                  formControlName="label"
+                  class="ng-invalid ng-dirty"
+                  class="p-invalid"
+                  required
+                />
+              </div>
+
+              <div class="w-50 d-flex flex-column">
+                <label for="labelAr" class="me-2 fw-bold text-dark">
+                  Label Arabic
+                </label>
+                <input
+                  id="labelAr"
+                  pInputText
+                  type="text"
+                  formControlName="labelAr"
+                />
+              </div>
+            </div>
+            <div class="d-flex flex-column py-3 gap-4">
+              <div class="w-50 mt-md-0 mt-2 d-flex align-items-center">
+                <div class="uk-placeholder">
+                  <div class="upload-image-wrapper">
+                    <label class="">
+                      Update Image<i class="fas fa-cloud-upload-alt"></i
+                    ></label>
+                    <input
+                      type="file"
+                      mode="basic"
+                      (change)="onFileChange($event, 'header')"
+                      name="image"
+                      accept="image/*"
+                    />
+                  </div>
+                </div>
+
+                <p-image
+                  class="w-full d-block ms-2"
+                  [src]="
+                    companiesForm.get('image')?.value &&
+                    !(
+                      companiesForm
+                        .get('image')
+                        ?.value.startsWith('http') ||
+                      companiesForm
+                        .get('image')
+                        ?.value.startsWith('https')
+                    )
+                      ? 'data:image/*;base64,' +
+                        companiesForm.get('image')?.value
+                      : companiesForm.get('image')?.value
+                  "
+                  width="100"
+                  *ngIf="companiesForm.value.image"
+                  [preview]="true"
+                >
+                </p-image>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex gap-2 justify-content-end  w-100 mb-3">
+        <button
+          pButton
+          pRipple
+          label="Discard"
+          (click)="reloadPage()"
+          class="btn discard-btn w-25 py-2 px-3 text-white"
+          type="button"
+        ><i class="fa fa-trash-alt me-3"></i></button>
+        <button
+          pButton
+          pRipple
+          label="Confirm"
+          class="btn confirm-btn w-25  py-2 px-3 text-white"
+          type="submit"
+        ><i class="fa fa-check me-3"></i></button>
+      </div>
+    </form>
+  </p-tabPanel>
+
+</p-tabView>

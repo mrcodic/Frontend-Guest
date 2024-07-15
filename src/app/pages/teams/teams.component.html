@@ -1,0 +1,45 @@
+<div class="page__banner"  [style.backgroundImage]="'url(' + image + ')'">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="page__banner-content">
+                    <span>{{header}}</span>
+                    <ul>
+                        <li><a routerLink="/home">Home</a><span>|</span></li>
+                        <li>Team</li>
+                    </ul>
+                    <h1>{{header}}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+	<!-- Team Page Area Start -->
+    <div class="team__area section-padding dark__image">
+        <div class="container">
+            <div class="row">
+              <div class="col-sm-12 col-md-12 mb-4 title-team">
+                <h3>{{title}}</h3>
+                <p>{{paragraph}}</p>
+              </div>
+				<div *ngFor="let member of teams" class="col-xl-4 col-lg-4 col-md-6  mb-30 mt-30">
+					<div class="team__area-item">
+						<div class="team__area-item-image ">
+							<img [src]="member?.image" alt="">
+							<p>
+								{{member?.bio}}
+							</p>
+						</div>
+						<div class="team__area-item-content page">
+							<h5><a href="#">{{member?.name}} </a></h5>
+							<span class="text-eight">{{member?.role}}</span>
+						</div>
+					</div>
+				</div>
+
+
+            </div>
+        </div>
+    </div>
+	<!-- Team Page Area End -->

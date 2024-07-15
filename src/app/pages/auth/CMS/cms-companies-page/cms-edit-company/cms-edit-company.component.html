@@ -1,0 +1,405 @@
+<p-toast position="top-right"></p-toast>
+<!-- <p-confirmDialog /> -->
+<section>
+    <form
+      class=""
+      [formGroup]="newCompanyForm"
+      (ngSubmit)="onSubmit('newCompanyForm')"
+    >
+    <div class="my-4 custom-border ps-3 py-3 custom-bg">
+      <div class="d-flex flex-column">
+        <div class="add-border">
+          <div class="d-flex gap-2">
+            <div class="w-50 d-flex flex-column">
+              <label for="name" class="me-2 fw-bold text-dark">
+                Name
+              </label>
+              <input
+                id="name"
+                pInputText
+                type="text"
+                formControlName="name"
+              />
+            </div>
+            <div class="w-50 d-flex flex-column">
+              <label for="nameAr" class="me-2 fw-bold text-dark">
+                Name Arabic
+              </label>
+              <input
+                id="nameAr"
+                pInputText
+                type="text"
+                formControlName="nameAr"
+              />
+            </div>
+          </div>
+          <div class="w-100 my-3 d-flex flex-column">
+            <label for="website" class="me-2 fw-bold text-dark">
+              Website
+            </label>
+            <input
+              id="website"
+              pInputText
+              type="text"
+              formControlName="website"
+            />
+          </div>
+          <div class="d-flex mb-3">
+            <div class="w-50 mt-2 d-flex flex-column pe-5">
+              <label for="bio" class="me-2 fw-bold text-dark">
+                Bio
+              </label>
+              <p-editor
+                id="bio"
+                pInputTextarea
+                type="text"
+                formControlName="bio"
+                [style]="{ height: '320px' }"
+              ></p-editor>
+            </div>
+            <div class="w-50 mt-2 d-flex flex-column pe-5">
+              <label for="bioAr" class="me-2 fw-bold text-dark">
+                Bio Arabic
+              </label>
+              <p-editor
+                id="bioAr"
+                pInputTextarea
+                type="text"
+                formControlName="bioAr"
+                [style]="{ height: '320px' }"
+              ></p-editor>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-start mt-2">
+        <h5>Label With Image</h5>
+        <button
+          pButton
+          pRipple
+          icon="fa fa-plus"
+          class="btn text-white bg-success rounded-circle ms-2 d-flex justify-content-center bg-success p-0"
+          (click)="
+              addWithLabel('imageWithLabel', 'NewCompany')
+            "
+        ></button>
+      </div>
+      <div class=" add-border"
+      formArrayName="imageWithLabel"
+          *ngIf="getWithLabel('imageWithLabel', 'NewCompany')"
+      >
+        <div
+          class="row mt-2 mb-5"
+          *ngFor="
+              let withLabel of getWithLabel(
+                'imageWithLabel',
+                'NewCompany'
+              )?.controls;
+              let i = index
+            "
+        >
+          <div [formGroupName]="i">
+            <div class="col-12 d-flex align-items-end">
+              <div class="w-25">
+                <label [for]="i" class="me-2 fw-bold text-dark">
+                  label
+                </label>
+                <input
+                  [id]="i"
+                  pInputText
+                  type="text"
+                  formControlName="label"
+                />
+              </div>
+              <div class="ms-3 w-25">
+                <label [for]="i" class="me-2 fw-bold text-dark">
+                  label AR
+                </label>
+                <input
+                  [id]="i"
+                  pInputText
+                  type="text"
+                  formControlName="labelAr"
+                />
+              </div>
+              <div class="ms-3 w-25 d-flex p-2">
+                <div class="uk-placeholder align-self-end">
+                  <div class="upload-image-wrapper">
+                    <label class="">
+                      Update Image<i class="fas fa-cloud-upload-alt"></i
+                    ></label>
+                    <input
+                      type="file"
+                      mode="basic"
+                      (change)="
+                        onFileChange(
+                          $event,
+                          'NewCompany',
+                          i,
+                          'imageWithLabel'
+                        )
+                      "
+                      name="image"
+                      accept="image/*"
+                    />
+                  </div>
+                </div>
+                  <p-image
+                  *ngIf="withLabel.get('image')?.value"
+                  class="w-full d-block ms-2"
+                  [src]="
+                    withLabel.get('image')?.value &&
+                    !(
+                      withLabel.get('image')?.value.startsWith('http') ||
+                      withLabel.get('image')?.value.startsWith('https')
+                    )
+                      ? 'data:image/*;base64,' + withLabel.get('image')?.value
+                      : withLabel.get('image')?.value
+                  "
+                  width="100"
+                  [preview]="true"
+                >
+                </p-image>
+              </div>
+              <div class="ms-3 w-25 d-flex p-2">
+                <button
+                  (click)="
+                  removeWithLabel(
+                    i,
+                    'NewCompany',
+                    'imageWithLabel'
+                  )
+                "
+                  pButton
+                  pRipple
+                  icon="fa fa-trash"
+                  class="btn rounded-circle p-2 custom-alignment text-white shadow d-flex justify-content-center bg-danger p-0"
+                ></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between mt-5">
+        <div>
+          <div class="mb-2">Featured & Logo Images:</div>
+          <div class="w-100 mt-md-0 mt-2 my-3 d-flex align-items-center">
+            <div class="uk-placeholder">
+              <div class="upload-image-wrapper">
+                <label class="">
+                  Update Featured Image<i
+                    class="fas fa-cloud-upload-alt"
+                  ></i
+                ></label>
+                <input
+                  type="file"
+                  mode="basic"
+                  (change)="onFileChange($event, 'NewCompany')"
+                  name="image"
+                  accept="image/*"
+                />
+              </div>
+            </div>
+            <p-image
+              class="w-full d-block ms-2"
+              [src]="
+                newCompanyForm.get('image')?.value &&
+                !(
+                  newCompanyForm.get('image')?.value.startsWith(
+                    'http'
+                  ) ||
+                  newCompanyForm.get('image')?.value.startsWith(
+                    'https'
+                  )
+                )
+                  ? 'data:image/*;base64,' +
+                  newCompanyForm.get('image')?.value
+                  : newCompanyForm.get('image')?.value
+              "
+              width="100"
+              *ngIf="newCompanyForm.value.image"
+              [preview]="true"
+            >
+            </p-image>
+          </div>
+          <div class="w-100 mt-md-0 mt-2 my-3 d-flex align-items-center">
+            <div class="uk-placeholder">
+              <div class="upload-image-wrapper">
+                <label class="">
+                  Update Logo Image<i class="fas fa-cloud-upload-alt"></i
+                ></label>
+                <input
+                  type="file"
+                  mode="basic"
+                  (change)="onFileChange($event, 'NewCompany')"
+                  name="logo"
+                  accept="image/*"
+                />
+              </div>
+            </div>
+            <p-image
+              class="w-full d-block ms-2"
+              [src]="
+                newCompanyForm.get('logo')?.value &&
+                !(
+                  newCompanyForm.get('logo')?.value.startsWith(
+                    'http'
+                  ) ||
+                  newCompanyForm.get('logo')?.value.startsWith(
+                    'https'
+                  )
+                )
+                  ? 'data:image/*;base64,' +
+                  newCompanyForm.get('logo')?.value
+                  : newCompanyForm.get('logo')?.value
+              "
+              width="100"
+              *ngIf="newCompanyForm.value.logo"
+              [preview]="true"
+            >
+            </p-image>
+          </div>
+        </div>
+        <div>
+          <div class="mb-2">Support Image:</div>
+          <div class="w-100 mt-md-0 mt-2 my-3 d-flex align-items-center">
+            <div class="uk-placeholder">
+              <div class="upload-image-wrapper">
+                <label class="">
+                  Update Support Image<i class="fas fa-cloud-upload-alt"></i
+                ></label>
+                <input
+                  type="file"
+                  mode="basic"
+                  (change)="onFileChange($event, 'NewCompany')"
+                  name="supportImage"
+                  accept="image/*"
+                />
+              </div>
+            </div>
+            <p-image
+              class="w-full d-block ms-2"
+              [src]="
+                newCompanyForm.get('supportImage')?.value &&
+                !(
+                  newCompanyForm.get(
+                    'supportImage'
+                  )?.value.startsWith('http') ||
+                  newCompanyForm.get(
+                    'supportImage'
+                  )?.value.startsWith('https')
+                )
+                  ? 'data:image/*;base64,' +
+                  newCompanyForm.get('supportImage')?.value
+                  : newCompanyForm.get('supportImage')?.value
+              "
+              width="100"
+              *ngIf="newCompanyForm.value.supportImage"
+              [preview]="true"
+            >
+            </p-image>
+          </div>
+        </div>
+        <div class="me-5">
+          <div class="mb-2">PDF Files:</div>
+
+          <div class="w-100 mt-md-0 mt-2 my-3 d-flex align-items-center">
+            <div class="uk-placeholder">
+              <div class="upload-image-wrapper">
+                <label class="">
+                  Upload Company Details PDF File<i
+                    class="fas fa-cloud-upload-alt"
+                  ></i
+                ></label>
+                <input
+                  type="file"
+                  mode="basic"
+                  name="detailsPdf"
+                  accept="application/pdf"
+                  (change)="readAsBase64($event, 'NewCompany')"
+                />
+              </div>
+            </div>
+            <a
+              *ngIf="newCompanyForm.get('detailsPdf')?.value"
+              href="{{
+                newCompanyForm.get('detailsPdf')?.value
+                  ? newCompanyForm.get('detailsPdf')?.value.startsWith(
+                      'http'
+                    ) ||
+                    newCompanyForm.get('detailsPdf')?.value.startsWith(
+                      'https'
+                    )
+                    ? newCompanyForm.get('detailsPdf')?.value
+                    : 'data:application/pdf;base64,' +
+                    newCompanyForm.get('detailsPdf')?.value
+                  : ''
+              }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="download-pdf"
+              >Details.pdf <i class="fas fa-file-pdf"></i
+            ></a>
+          </div>
+          <div class="w-100 mt-md-0 mt-2 my-3 d-flex align-items-center">
+            <div class="uk-placeholder">
+              <div class="upload-image-wrapper">
+                <label class="">
+                  Upload Brochures PDF File<i
+                    class="fas fa-cloud-upload-alt"
+                  ></i
+                ></label>
+                <input
+                  type="file"
+                  mode="basic"
+                  name="brochuresPdf"
+                  accept="application/pdf"
+                  (change)="readAsBase64($event, 'NewCompany')"
+                />
+              </div>
+            </div>
+            <a
+              *ngIf="newCompanyForm.get('brochuresPdf')?.value"
+              href="{{
+                newCompanyForm.get('brochuresPdf')?.value
+                  ? newCompanyForm.get(
+                      'brochuresPdf'
+                    )?.value.startsWith('http') ||
+                    newCompanyForm.get(
+                      'brochuresPdf'
+                    )?.value.startsWith('https')
+                    ? newCompanyForm.get('brochuresPdf')?.value
+                    : 'data:application/pdf;base64,' +
+                    newCompanyForm.get('brochuresPdf')?.value
+                  : ''
+              }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="download-pdf"
+              >Brochures.pdf
+              <i class="fas fa-file-pdf"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="d-flex gap-2 justify-content-end  w-100 ">
+      <button
+        pButton
+        pRipple
+        label="Discard"
+        (click)="reloadPage()"
+        class="btn discard-btn w-25 py-2 px-3 text-white"
+        type="button"
+      ><i class="fa fa-trash-alt me-3"></i></button>
+      <button
+        pButton
+        pRipple
+        label="Confirm"
+        class="btn confirm-btn w-25  py-2 px-3 text-white"
+        type="submit"
+      ><i class="fa fa-check me-3"></i></button>
+    </div>
+    </form>
+</section>

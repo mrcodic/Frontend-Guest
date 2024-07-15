@@ -1,0 +1,123 @@
+<p-toast position="bottom-right"></p-toast>
+<div class="d-flex justify-content-between p-3 mt-3">
+  <h3>{{ pageTitle }} Page Edit</h3>
+</div>
+<div class="header">
+  <!-- header section -->
+  <div class="header mb-5">
+    <h5 class="mb-2">header</h5>
+    <div class="row">
+      <div class="col-md-6 col-12 d-flex align-items-center">
+        <label for="headerLabel" class="me-2 fw-bold text-dark"> Label </label>
+        <input
+          id="headerLabel"
+          pInputText
+          type="text"
+          [(ngModel)]="headerLabel"
+        />
+      </div>
+      <div class="col-md-6 col-12 mt-md-0 mt-2 d-flex align-items-center">
+        <label class="me-2 fw-bold text-dark"> Image </label>
+        <app-file-uploader
+          [changeFile]="headerImage.image ? true : false"
+          (fileUploaded)="fileUploaded($event, 'headerImage')"
+        ></app-file-uploader>
+        <p-image
+          class="w-full d-block ms-2"
+          [src]="headerImage.image"
+          width="80"
+          *ngIf="headerImage.image"
+          [preview]="true"
+        ></p-image>
+      </div>
+    </div>
+  </div>
+  <!-- gallerys section -->
+  <div class="header mb-5">
+    <div class="d-flex justify-content-between">
+      <h5>News</h5>
+      <button
+        pButton
+        pRipple
+        icon="fa fa-plus"
+        class="btn text-secondary rounded-circle text-center p-0"
+        (click)="handleNewsArr([], 'ADD')"
+      ></button>
+    </div>
+    <div class="row mt-2" *ngFor="let newsOne of news; let i = index">
+      <div class="col-md-6 col-12 d-flex align-items-center">
+        <label [for]="news[i].content" class="me-2 fw-bold text-dark">
+          Content
+        </label>
+        <input
+          [id]="news[i].content"
+          pInputText
+          type="text"
+          [(ngModel)]="newsOne.content"
+        />
+      </div>
+      <div class="col-md-6 col-12 d-flex align-items-center">
+        <label [for]="news[i].title" class="me-2 fw-bold text-dark">
+          Title
+        </label>
+        <input
+          [id]="news[i].title"
+          pInputText
+          type="text"
+          [(ngModel)]="newsOne.title"
+        />
+      </div>
+      <div class="col-md-6 col-12 d-flex align-items-center">
+        <label [for]="news[i].link" class="me-2 fw-bold text-dark">
+          Link
+        </label>
+        <input
+          [id]="news[i].link"
+          pInputText
+          type="text"
+          [(ngModel)]="newsOne.link"
+        />
+      </div>
+      <div class="col-md-4 col-10 mt-md-0 mt-2 d-flex align-items-center">
+        <label class="me-2 fw-bold text-dark"> Image </label>
+        <app-file-uploader
+          [uploaded]="newsOne.base64Image ? true : false"
+          [changeFile]="newsOne.image ? true : false"
+          (fileUploaded)="handleNewsArr([], 'IMAGE', i, $event)"
+        ></app-file-uploader>
+        <p-image
+          class="w-full d-block ms-2"
+          [src]="newsOne.image"
+          width="80"
+          *ngIf="newsOne.image"
+          [preview]="true"
+        ></p-image>
+      </div>
+      <button
+        (click)="handleNewsArr([], 'REMOVE', i)"
+        pButton
+        pRipple
+        icon="fa fa-trash"
+        class="col-2 btn text-danger rounded-circle text-center p-0"
+      ></button>
+    </div>
+  </div>
+  <div class="w-100 d-flex justify-content-end">
+    <button
+      pButton
+      pRipple
+      label="Discard"
+      (click)="reloadPage()"
+      class="btn btn-warning me-2 mb-md-0 px-3 text-white"
+      type="submit"
+    ></button>
+    <button
+      pButton
+      pRipple
+      label="Confirm"
+      (click)="handleNewsArr([], 'SUBMIT')"
+      class="btn btn-success me-2 mb-md-0 px-3 text-white"
+      type="submit"
+    ></button>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+.custom-border {
+  border-left: 8px solid #006666;
+  border-radius: 8px;
+}
+.custom-bg {
+  background-color: #f6f6f6;
+}
+
+.rounded-circle-custom {
+  border-radius: 50% !important;
+}
+
+// .custom-alignment {
+//   position: absolute;
+//   // margin: auto;
+//   right: 20px;
+//   // top: 1px;
+// }
+
+.services__two-arrow-prev i:hover , .services__two-arrow-next i:hover{
+  background: var(--primary-color-1);
+  color: var(--text-white);
+  border-color: var(--primary-color-1);
+}
+
+.move-transition {
+  transition: transform 0.3s ease;
+}

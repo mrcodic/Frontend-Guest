@@ -1,0 +1,12 @@
+.title-team p {
+  width: 80%;
+}
+@media (max-width: 760px) {
+  .page__banner {
+    background-size: contain;
+  }
+  .page__banner-content {
+    position: absolute;
+    bottom: 22%;
+  }
+}

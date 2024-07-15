@@ -1,0 +1,104 @@
+<p-toast position="top-right"></p-toast>
+
+<div class="d-flex justify-content-between">
+  <h6 class="mt-3 mb-3 px-4">Edit {{pageTitle}}</h6>
+</div>
+
+<p-tabView>
+  <p-tabPanel header="All Social">
+    <app-data-table
+      [isActions]="true"
+      [cols]="cols"
+      [data]="socialData"
+      (actionClicked)="callAction($event)"
+    ></app-data-table>
+    
+    <p-dialog
+      [(visible)]="display"
+      [dismissableMask]="true"
+      [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+      [style]="{ width: '50vw' }"
+      [header]="action + ' ' + pageTitle"
+    >
+      <app-user-dialog-content
+        *ngIf="display"
+        [action]="action"
+        [userId]="_id"
+        (closeDialog)="close()"
+      ></app-user-dialog-content>
+    </p-dialog>
+    
+    <p-confirmDialog
+      acceptButtonStyleClass="bg-success px-3 py-2"
+      rejectButtonStyleClass="bg-danger me-3 px-3 py-2"
+      acceptLabel="Yes"
+      rejectLabel="No"
+      [style]="{ width: '450px' }"
+    ></p-confirmDialog>
+  </p-tabPanel>
+  <p-tabPanel header="Header ">
+    <div class="mb-4 custom-border ps-3 py-3 custom-bg">
+      <h5 class="mb-2">header</h5>
+      <div class="d-flex flex-column">
+        <div
+          class="w-50 mt-md-0 mt-2 d-flex flex-md-nowrap flex-wrap align-items-center"
+        >
+          <app-file-uploader
+            [changeFile]="headerImage.image ? true : false"
+            (fileUploaded)="fileUploaded($event, 'headerImage')"
+          ></app-file-uploader>
+          <p-image
+            class="w-full d-block ms-2"
+            [src]="
+              headerImage.base64Image
+                ? 'data:image/*;base64,' + headerImage.base64Image
+                : headerImage.image
+            "
+            width="80"
+            *ngIf="headerImage.image"
+            [preview]="true"
+          ></p-image>
+        </div>
+        <div class="w-50 mt-3 d-flex flex-column">
+          <label for="headerLabel" class="me-2 fw-bold text-dark"> Label </label>
+          <input
+            id="headerLabel"
+            pInputText
+            type="text"
+            [(ngModel)]="headerLabel"
+          />
+        </div>
+        <div class="w-50 mt-3 d-flex flex-column">
+          <label for="headerLabelAr" class="me-2 fw-bold text-dark">
+            Label Arabic
+          </label>
+          <input
+            id="headerLabelAr"
+            pInputText
+            type="text"
+            [(ngModel)]="headerLabelAr"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="w-100 d-flex justify-content-end">
+      <button
+        pButton
+        pRipple
+        label="Discard"
+        (click)="reloadPage()"
+        class="btn btn-warning me-2 mb-md-0 px-3 text-white"
+        type="submit"
+      ></button>
+      <button
+        pButton
+        pRipple
+        label="Confirm"
+        (click)="formSubmitted()"
+        class="btn btn-success me-2 mb-md-0 px-3 text-white"
+        type="submit"
+      ></button>
+    </div>
+  </p-tabPanel>
+</p-tabView>
+

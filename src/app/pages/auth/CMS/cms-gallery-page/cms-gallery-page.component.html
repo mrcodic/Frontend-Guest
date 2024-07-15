@@ -1,0 +1,323 @@
+<p-toast position="top-right"></p-toast>
+<p-confirmDialog />
+<div class="d-flex justify-content-between">
+  <h6 class="mt-3 mb-3 px-4">Edit {{pageTitle}} Page</h6>
+</div>
+<p-tabView>
+  <!-- gallerys section -->
+   <p-tabPanel header="All Gallery">
+     <div class="mb-4 custom-border ps-3 py-3 custom-bg">
+       <div class="d-flex justify-content-between">
+         <!-- <h5>Gallery</h5> -->
+         <button
+         pButton
+         pRipple
+         icon="fa fa-plus"
+         class="btn text-white bg-success rounded-circle ms-2 d-flex justify-content-center bg-success p-0"
+         (click)="handleGalleryArr([], 'ADD')"
+       ></button>
+       </div>
+       <div
+         class="row mt-2 g-border p-2 pb-4 mx-3"
+         *ngFor="let galleryOne of gallery; let i = index"
+       >
+       <h4>#{{i+1}}</h4>
+         <!-- <div
+           class="col-md-6 col-12"
+         >
+           <label [for]="gallery[i].category" class="me-2 fw-bold text-dark mb-2 mt-3">
+             Category
+           </label>
+           <input
+             [id]="gallery[i].category"
+             pInputText
+             type="text"
+             [(ngModel)]="galleryOne.category"
+           />
+         </div> -->
+         <div
+           class="col-md-6 col-12 mt-2"
+         >
+           <label [for]="gallery[i].label" class="me-2 fw-bold text-dark mb-2 mt-3">
+             Label
+           </label>
+           <input
+             [id]="gallery[i].label"
+             pInputText
+             type="text"
+             [(ngModel)]="galleryOne.label"
+           />
+         </div>
+         <div
+           class="col-md-6 col-12 mt-2"
+         >
+           <label [for]="gallery[i].labelAr" class="me-2 fw-bold text-dark mb-2 mt-3">
+             Label Arabic
+           </label>
+           <input
+             [id]="gallery[i].labelAr"
+             pInputText
+             type="text"
+             [(ngModel)]="galleryOne.labelAr"
+           />
+         </div>
+         <div
+           class="col-md-6 col-12 mt-2"
+         >
+           <label [for]="gallery[i].title" class="me-2 fw-bold text-dark mb-2 mt-3">
+             Title
+           </label>
+           <input
+             [id]="gallery[i].title"
+             pInputText
+             type="text"
+             [(ngModel)]="galleryOne.title"
+           />
+         </div>
+         <div
+           class="col-md-6 col-12 mt-2"
+         >
+           <label [for]="gallery[i].titleAr" class="me-2 fw-bold text-dark mb-2 mt-3">
+             Title Arabic
+           </label>
+           <input
+             [id]="gallery[i].titleAr"
+             pInputText
+             type="text"
+             [(ngModel)]="galleryOne.titleAr"
+           />
+         </div>
+         <div
+           class="col-md-6 col-12 mt-2"
+         >
+           <label [for]="gallery[i].link" class="me-2 fw-bold text-dark mb-2 mt-3">
+             Link
+           </label>
+           <input
+             [id]="gallery[i].link"
+             pInputText
+             type="text"
+             [(ngModel)]="galleryOne.link"
+           />
+         </div>
+         <div class="col-md-6 col-12 mt-2">
+           <label [for]="gallery[i].category" class="me-2 fw-bold text-dark mb-2 mt-3">Category</label>
+           <p-dropdown
+           class="d-flex"
+             [id]="gallery[i].category"
+             [options]="categories"
+             [(ngModel)]="gallery[i].category"
+             optionLabel="name"
+             optionValue="_id"
+             [placeholder]="getCategoryName(gallery[i].category)! || 'Select category'"
+             (ngModelChange)="onCategoryChange($event, i)"
+             >
+           </p-dropdown>
+         </div>
+         <div
+           class="col-12 mt-4 d-flex "
+         >
+           <app-file-uploader
+             [uploaded]="galleryOne.base64Image ? true : false"
+             [changeFile]="galleryOne.image ? true : false"
+             (fileUploaded)="handleGalleryArr([], 'IMAGE', i, $event)"
+           ></app-file-uploader>
+           <p-image
+             class="w-full d-block ms-2"
+             [src]="
+               galleryOne.base64Image
+                 ? 'data:image/*;base64,' + galleryOne.base64Image
+                 : galleryOne.image
+             "
+             width="80"
+             *ngIf="galleryOne.image"
+             [preview]="true"
+           ></p-image>
+           </div>
+           <div class="add w-100 d-flex mt-4">
+             <button
+               (click)="handleGalleryArr([], 'REMOVE', i)"
+               pButton
+               pRipple
+               icon="fa fa-trash"
+               class="btn rounded-circle p-2 custom-alignment text-white shadow d-flex justify-content-center bg-danger p-0"
+             ></button>
+             <button
+               pButton
+               pRipple
+               icon="fa fa-plus"
+               class="btn text-white bg-success rounded-circle ms-2 d-flex justify-content-center bg-success p-0"
+               (click)="handleGalleryArr([], 'ADD')"
+             ></button>
+           </div>
+       </div>
+     </div>
+     <div class="w-100 d-flex justify-content-end mb-3">
+       <button
+         pButton
+         pRipple
+         label="Discard"
+         (click)="reloadPage()"
+         class="btn btn-warning me-2 mb-md-0 px-3 text-white"
+         type="submit"
+       ></button>
+       <button
+         pButton
+         pRipple
+         label="Confirm"
+         (click)="handleGalleryArr([], 'SUBMIT')"
+         class="btn btn-success me-2 mb-md-0 px-3 text-white"
+         type="submit"
+       ></button>
+     </div>
+   </p-tabPanel>
+  <!-- gallery categories section -->
+   <p-tabPanel header="Gallery Categories">
+     <section>
+       <form [formGroup]="categoryForm" (ngSubmit)="onSubmit('categoryForm')">
+         <div class="mb-4 custom-border px-3 py-3 custom-bg">
+           <div class="d-flex justify-content-between">
+             <!-- <h5 class="mb-2">Category</h5> -->
+             <button
+               pButton
+               pRipple
+               icon="fa fa-plus"
+               class="btn text-white bg-success rounded-circle ms-2 d-flex justify-content-center bg-success p-0"
+               (click)="addForm('categoryForm', $event)"
+             ></button>
+           </div>
+           <div formArrayName="categoryFormArray">
+             <div *ngFor="let form of getCategoryFrom.controls; let i = index">
+               <div [formGroupName]="i" class="border-2 border-bottom p-3">
+                 <input type="hidden" name="_id" formControlName="_id" />
+                 <div class="container-fluid">
+                   <div class="row">
+                     <div class="col-sm">
+                       <div class="w-50 d-flex flex-column">
+                         <label for="name" class="me-2 fw-bold text-dark">
+                           Name
+                         </label>
+                         <input
+                           id="name"
+                           pInputText
+                           type="text"
+                           formControlName="name"
+                           class="ng-invalid ng-dirty"
+                           class="p-invalid"
+                           required
+                         />
+                       </div>
+                       <div class="add w-100 d-flex mt-4">
+                         <button
+                           (click)="removeForm(i, 'categoryForm', $event)"
+                           pButton
+                           pRipple
+                           icon="fa fa-trash"
+                           class="btn rounded-circle p-2 custom-alignment text-white shadow d-flex justify-content-center bg-danger p-0"
+                         ></button>
+                         <button
+                           pButton
+                           pRipple
+                           icon="fa fa-plus"
+                           class="btn text-white bg-success rounded-circle ms-2 d-flex justify-content-center bg-success p-0"
+                           (click)="addForm('categoryForm', $event)"
+                         ></button>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+         <div class="w-100 d-flex justify-content-end">
+           <button
+             pButton
+             pRipple
+             label="Discard"
+             (click)="reloadPage()"
+             class="btn btn-warning me-2 mb-md-0 px-3 text-white"
+             type="submit"
+           ></button>
+           <button
+             pButton
+             pRipple
+             label="Confirm"
+             (click)="handleGalleryArr([], 'SUBMIT')"
+             class="btn btn-success me-2 mb-md-0 px-3 text-white"
+             type="submit"
+           ></button>
+         </div>
+       </form>
+     </section>
+   </p-tabPanel>
+   <!-- header section -->
+   <p-tabPanel header="Header ">
+     <div class="mb-4 custom-border px-3 py-3 custom-bg">
+       <!-- <h5 class="mb-2">header</h5> -->
+       <div class="row px-4">
+         <div
+           class="col-md-6 col-12 mt-3"
+         >
+           <label for="headerLabel" class="me-2 fw-bold text-dark mb-2"> Title </label>
+           <input
+             id="headerLabel"
+             pInputText
+             type="text"
+             [(ngModel)]="headerLabel"
+           />
+         </div>
+         <div
+           class="col-md-6 col-12 mt-3"
+         >
+           <label for="headerLabelAr" class="me-2 fw-bold text-dark mb-2">
+             Title Arabic
+           </label>
+           <input
+             id="headerLabelAr"
+             pInputText
+             type="text"
+             [(ngModel)]="headerLabelAr"
+           />
+         </div>
+         <div
+           class="col-md-6 col-12 d-flex flex-md-nowrap flex-wrap align-items-center mt-3"
+         >
+           <app-file-uploader
+             [changeFile]="headerImage.image ? true : false"
+             (fileUploaded)="fileUploaded($event, 'headerImage')"
+           ></app-file-uploader>
+           <p-image
+             class="w-full d-block ms-2"
+             [src]="
+               headerImage.base64Image
+                 ? 'data:image/*;base64,' + headerImage.base64Image
+                 : headerImage.image
+             "
+             width="80"
+             *ngIf="headerImage.image"
+             [preview]="true"
+           ></p-image>
+         </div>
+       </div>
+     </div>
+     <div class="w-100 d-flex justify-content-end mb-3">
+       <button
+         pButton
+         pRipple
+         label="Discard"
+         (click)="reloadPage()"
+         class="btn btn-warning me-2 mb-md-0 px-3 text-white"
+         type="submit"
+       ></button>
+       <button
+         pButton
+         pRipple
+         label="Confirm"
+         (click)="handleGalleryArr([], 'SUBMIT')"
+         class="btn btn-success me-2 mb-md-0 px-3 text-white"
+         type="submit"
+       ></button>
+     </div>
+   </p-tabPanel>
+</p-tabView>

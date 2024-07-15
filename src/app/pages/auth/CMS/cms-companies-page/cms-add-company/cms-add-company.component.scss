@@ -1,0 +1,126 @@
+.custom-border {
+    border-left: 8px solid #006666;
+    border-radius: 8px;
+  }
+  .custom-border-right {
+    border-right: 8px solid #006666;
+    border-radius: 8px;
+  }
+  .custom-bg {
+    background-color: #f6f6f6;
+  }
+  .pageTitle {
+    background-color: transparent !important;
+  }
+  .light-shadow {
+    box-shadow: 0px 3px 5px 0 #ababab3b;
+  }
+  .rounded-circle-custom {
+    border-radius: 50% !important;
+  }
+  .add-border {
+    border-bottom: 2px solid #adadad5e;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+  }
+  .uk-placeholder {
+    border: 1px dashed #6f6f6f;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .upload-image-wrapper {
+    text-align: center;
+    padding: 10px 20px;
+    background: rgb(76 211 217 / 32%);
+    border-radius: 5px;
+    position: relative;
+  }
+  .upload-image-wrapper label {
+    color: #555454;
+    font-size: 0.8rem;
+  }
+  .upload-image-wrapper label i {
+    margin-left: 5px;
+  }
+  .upload-image-wrapper input {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    -webkit-appearance: none;
+    opacity: 0;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  .remove-btn {
+    margin-left: 10px;
+    border-width: 0 !important;
+  }
+  .download-pdf {
+    margin-left: 20px;
+    background: #eee;
+    padding: 5px 10px;
+    border: dashed 1px;
+    font-size: 0.9rem;
+  }
+  .download-pdf i {
+    margin-left: 10px;
+  }
+  ::ng-deep .p-tabview-nav {
+    background-color: transparent !important;
+    padding-left: 0 !important ;
+    // justify-content: space-between;
+  }
+  ::ng-deep .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+    background-color: transparent !important;
+  }
+  ::ng-deep .p-tabview .p-tabview-panels {
+    background-color: transparent !important;
+    padding: 0;
+  }
+  
+  // ::ng-deep .p-datatable-header .align-self-center{
+  //   display: none;
+  // }
+  
+  .confirm-btn{
+    background-color: #006666;
+  }
+  .confirm-btn:hover{
+    transition: all 0.3s ease-in-out;
+    background-color: #1db6b6;
+  transform: translateY(-8px);
+  box-shadow: 0px 3px 5px 0 #ababab3b;
+  
+  }
+  .discard-btn{
+    background-color: #b92b0f;
+  }
+  .discard-btn:hover{
+    transition: all 0.3s ease-in-out;
+    background-color: #c8452b;
+    transform: translateY(-8px);
+    box-shadow: 0px 3px 5px 0 #ababab3b;
+  
+  
+  }
+  
+  :host ::ng-deep{ 
+    .p-dialog-footer {
+      display: flex;
+      justify-content: space-between;
+    }
+    .p-element {
+      padding: revert-layer !important;
+    }
+  }
+  
+  ::ng-deep .p-datatable-header .align-self-center .btn-danger{
+    display: none;
+  }
+  
+  ::ng-deep .ng-star-inserted .text-secondary{
+    display: none;
+  }

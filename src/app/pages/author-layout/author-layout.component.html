@@ -1,0 +1,21 @@
+<!-- <app-preloader></app-preloader> -->
+<div class="sidebar" [ngClass]="{ collapsed: collapsed }">
+  <div class="logo-details d-flex flex-column">
+    <button class="toggle-btn" (click)="toggleCollapse()">
+      <i
+        class="fa fa-bars text-light"
+        [class.bx-menu]="!collapsed"
+        [class.bx-menu-alt-right]="collapsed"
+      ></i>
+    </button>
+    <img
+      src="../../../assets/img/logo/logo-white.svg"
+      alt=""
+      class="img-fluid"
+    />
+  </div>
+  <p-panelMenu class="nav-list" [model]="items"></p-panelMenu>
+</div>
+<div class="main-content">
+  <router-outlet></router-outlet>
+</div>

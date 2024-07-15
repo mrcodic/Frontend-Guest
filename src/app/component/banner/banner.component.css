@@ -1,0 +1,39 @@
+.btn-one, .btn-two, .btn-three, .btn-four, .btn-five, .btn-six, .btn-seven, .btn-eight, .btn-nine {
+    background: var(--primary-color-2);
+}
+.carousel-item {
+    height: auto;
+}
+.carousel-inner {
+    height: auto;
+}
+.carousel-caption {
+    left: 15%;
+    bottom: 15%;
+    right: auto;
+    z-index: 99;
+}
+.carousel-caption h2 {
+    font-weight: 700;
+    font-size: 55px;
+    line-height: normal;
+    color: #bd9e55;
+    text-transform: uppercase;
+    text-align: left;
+}
+.carousel-inner{
+    position: relative;;
+}
+.carousel-inner::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: #0000006b;
+    z-index: 1;
+}
+@media (max-width: 760px) {
+  div.slide {
+    height: auto;
+  }
+}

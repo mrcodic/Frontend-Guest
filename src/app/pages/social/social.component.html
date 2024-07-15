@@ -1,0 +1,96 @@
+<div
+  class="page__banner"
+  [style.backgroundImage]="'url(' + image + ')'"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="page__banner-content">
+          <span>{{header}}</span>
+          <ul>
+            <li><a routerLink="/home">Home</a><span>|</span></li>
+            <li>Social</li>
+          </ul>
+          <h1>{{header}}</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Services Details Start -->
+<div class="services__details section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-8 col-lg-8 lg-mb-60 second-small">
+        <div class="services__details-left">
+          <div class="services__details-left-image dark__image">
+            <img [src]="currentItem?.image" alt="">
+          </div>
+          <div class="services__details-left-content">
+            <h2>{{currentItem?.title}}</h2>
+            <p class="mb-25" [innerHTML]="sanitizeHtml(currentItem?.content)"></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-4 col-lg-4">
+        <div class="col-xl-12 col-lg-12 order-last order-lg-first">
+          <div class="all__sidebar">
+            <div class="all__sidebar-item">
+              <h4>Date & Year Filter</h4>
+              <form class="row">
+                <div class="col-12">
+                  <label for="fromDate" class="col-form-label">choose data</label>
+                  <p-calendar
+                  class="custom-calendar"
+                  [(ngModel)]="dateRange"
+                  [showIcon]="true"
+                  [showOnFocus]="false"
+                  selectionMode="range"
+                  inputId="buttondisplay"
+                  [ngModelOptions]="{standalone:true}"
+                  (onSelect)="onDateChange()"
+                  ></p-calendar>
+                </div>
+              </form>
+            </div>
+            <div class="all__sidebar">
+              <div class="all__sidebar-item">
+                <h4>Our community cooperation</h4>
+                <div class="all__sidebar-item-solution">
+                  <ul>
+                    <li *ngFor="let item of filteredMembers">
+                      <a
+                      [ngClass]="{'active': item._id === activeCompanyId}"
+                      (click)="getData(item._id)">
+                          {{item.title}}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- <div class="all__sidebar">
+          <div class="all__sidebar-item">
+            <h4>Our community cooperation</h4>
+            <div class="all__sidebar-item-solution">
+              <ul>
+                <li *ngFor="let item of filteredMembers">
+                  <a
+                  [ngClass]="{'active': item._id === activeCompanyId}"
+                   (click)="getData(item._id)">
+                      {{item.title}}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Services Details End -->

@@ -1,0 +1,53 @@
+<div class="page__banner"  [style.backgroundImage]="'url(' + image + ')'">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="page__banner-content">
+                    <span>{{header}}</span>
+                    <ul>
+                        <li><a routerLink="/home">Home</a><span>|</span></li>
+                        <li>Our gallery</li>
+                    </ul>
+                    <h1>{{header}}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Portfolio Area Start -->
+    <div class="project__one section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12 mb-30">
+                    <!-- <div class="conbix__filter-button">
+                        <button class="active" (click)="filterGallery('')">All</button>
+                        <button (click)="filterGallery('Contract')" >Contract</button>
+                        <button (click)="filterGallery('Projects')" >Projects</button>
+                        <button (click)="filterGallery('Events')" >Events</button>
+                        <button (click)="filterGallery('Photos')" >Photos</button>
+                    </div> -->
+                    <div class="conbix__filter-button">
+                        <button class="active" (click)="filterGallery('')">All</button>
+                        <button *ngFor="let category of categories" (click)="filterGallery(category)">{{ category }}</button>
+                      </div>
+                </div>
+            </div>
+            <div class="row conbix__filter-active">
+                <div *ngFor="let item of filteredGalleryItems" class="col-xl-4 col-md-6 mt-30 position-relative-custom">
+                    <div class="project__one-item">
+                        <img class="img__full" [src]="item?.image" alt="">
+                        <div class="project__one-item-content">
+                            <span>{{item?.label}}</span>
+                            <h4><a (click)="navigateGallery(item.link)">{{item?.title}}</a></h4>
+                        </div>
+                        <div class="project__one-item-icon">
+                            <a (click)="navigateGallery(item.link)"><i class="fal fa-long-arrow-up"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Portfolio Area End -->

@@ -1,0 +1,203 @@
+<app-banner></app-banner>
+<!-- About Area Start -->
+<div class="about__one dark__image section-padding">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-xl-6 col-lg-6 lg-mb-30">
+				<div class="about__one-left">
+					<div class="about__one-left-image">
+						<img  class="one img-fluid" src="{{aboutusimgOne?.image}}" alt="">
+						<img class="two img-fluid" src="{{aboutusimgTwo?.image}}" alt="">
+					</div>
+					<div class="about__one-left-experience">
+						<h1><span class="counter">1972</span></h1>
+						<h6>SINCE</h6>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6">
+				<div class="about__one-right">
+					<div class="about__one-right-title">
+						<h2>{{aboutus?.title}}</h2>
+						<p [innerHTML]="sanitizeHtml(aboutus?.content)">
+						</p>
+					</div>
+					<div class="about__one-right-btn">
+						<div>
+							<a class="btn-one" [routerLink]="['/about']">Discover More<i
+									class="far fa-chevron-double-right"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<img class="about__one-shape-1 dark-n"[src]="aboutus?.image?.image" alt="">
+	</div>
+<!-- About Area End -->
+
+
+<div class="tp-fact-area counter-mlr">
+	<div class="container-custom">
+		<div class="fact-bg mob-fact-bg" data-background="assets/img/shape/bg.jpg"
+			style="background-image: url(assets/img/shape/bg.jpg);">
+			<div class="row align-items-center">
+
+				<div *ngFor="let item of statistics"  class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-6 col-12">
+
+					<div class="tpfact mb-30 wow fadeInUp mob-flex" data-wow-duration="1.5s" data-wow-delay="700ms"
+						style="visibility: visible; animation-duration: 1.5s; animation-delay: 700ms; animation-name: fadeInUp;">
+						<div class="tpfact__icon">
+							<!-- <i *ngIf="!item.image" class="fal fa-calendar-alt"></i> -->
+              <img class="dark-n"[src]="item?.image" alt="" style="width: 55px;">
+
+						</div>
+						<div class="tpfact__content">
+							<h2>{{item?.value}}</h2>
+							<span>{{item?.label}}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div *ngIf="message" class="getIn__touch-three section-padding pb-200 pt-200" data-background="assets/img/banner/banner-4.jpg"
+[style.backgroundImage]="'url(' + message?.image + ')'">
+>
+	<img class="getIn__touch-three-shape left-right-animate2" src="assets/img/shape/getInTouchThree.png" alt="">
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-10 col-lg-10 lg-mb-50">
+				<div class="getIn__touch-three-left">
+					<div class="getIn__touch-three-left-title">
+						<h2>Chairman Message</h2>
+						<p [innerHTML]="sanitizeHtml(message?.content)">
+						</p>
+						<p><B>{{message?.name}}</B></p>
+						<a class="btn-one mt-5" [routerLink]="['/management']">Know More<i
+								class="far fa-chevron-double-right"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- timeline -->
+
+<app-timeline></app-timeline>
+
+<!-- timeline-end -->
+
+
+<div class="portfolio__area dark__image section-padding pb-0">
+	<div class="container-fluid p-0">
+		<div class="row mb-60">
+			<div class="col-xl-12">
+				<div class="portfolio__area-title t-center">
+					<span class="subtitle-one">Company</span>
+					<h2>Industries We Serve</h2>
+					<a class="btn-one mt-4" [routerLink]="['companies']">All SECTORS<i
+							class="far fa-chevron-double-right"></i></a>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="swiper portfolio__area-slider">
+					<div class="col-xl-12 col-sm-12 d-flex justify-content-center mb-50">
+						<div class="services__two-arrow t-right sm-t-center">
+							<div class="services__two-arrow-prev swiper-button-prev"><i
+									class="fal fa-long-arrow-left"></i></div>
+							<div class="services__two-arrow-next swiper-button-next"><i
+									class="fal fa-long-arrow-right"></i></div>
+						</div>
+					</div>
+					<div class="swiper-wrapper">
+						<div *ngFor="let item of industries"  class="portfolio__area-item swiper-slide">
+							<img [src]="item.image" alt="">
+							<div class="portfolio__area-item-content">
+								<div class="portfolio__area-item-content-title">
+									<h4><a (click)="navigateIndustries(item?.link)">{{item?.label}}</a></h4>
+								</div>
+								<div class="portfolio__area-item-content-icon">
+									<a (click)="navigateIndustries(item?.link)"><img src="assets/img/icon/up-arrow.png" alt=""></a>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<!-- Add navigation buttons -->
+					<div class="swiper-button-next"></div>
+					<div class="swiper-button-prev"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Portfolio Area End -->
+
+<!-- Client 1 - HCF Bootstrap 5 Component -->
+<section class="section-padding clent-sec">
+	<div class="row mb-100">
+		<div class="col-xl-12">
+			<div class="portfolio__area-title t-center">
+				<span class="subtitle-one">LOGO</span>
+				<h2>OUR PARTNERS</h2>
+			</div>
+		</div>
+	</div>
+	<div class="container overflow-hidden">
+		<!-- Simple logo carousel slider -->
+		<!-- <div class="logo-slider-1">
+			<div class="owl-carousel version-1">
+				<div *ngFor="let item of partners" class="d-flex justify-content-between" > <img [src]="item?.image" class="img-fluid col-12 col-md-4" alt=""> </div>
+			</div>
+		</div> -->
+    <div class="logo-slider-1">
+			<div class="owl-carousel version-1">
+				<div *ngFor="let item of partners" class="" > <img [src]="item?.image" class="" alt=""> </div>
+			</div>
+		</div>
+		<!-- End Simple logo carousel slider -->
+	</div>
+</section>
+
+
+<!-- Blog Area Start -->
+<div class="blog__one dark__image section-padding">
+	<div class="container">
+		<div class="row align-items-end mb-70">
+			<div class="col-xl-7 col-lg-8 lg-mb-30">
+				<div class="blog__one-title lg-t-center">
+					<span class="subtitle-one">NEWS</span>
+					<h2>News & Events</h2>
+				</div>
+			</div>
+			<div class="col-xl-5 col-lg-4 t-right lg-t-center">
+				<a class="btn-two" [routerLink]="['/news']">See more news<i class="far fa-chevron-double-right"></i></a>
+			</div>
+		</div>
+		<div class="row">
+			<div *ngFor="let item of blogs" class="col-xl-4 col-lg-6 xl-mb-30">
+				<div class="blog__one-item">
+					<div class="blog__one-item-image">
+						<a [routerLink]="['/news',item._id]"><img [src]="item?.image" alt=""></a>
+						<div class="blog__one-item-image-date">
+							<span class="text-three">{{item?.createdAt | date:'yyyy'}}</span>
+						</div>
+					</div>
+					<div class="blog__one-item-content">
+						<h4><a [routerLink]="['/news',item._id]"> {{item?.title}}</a></h4>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+<!-- Blog Area End -->

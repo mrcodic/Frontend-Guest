@@ -1,0 +1,28 @@
+.career-p {
+  padding: 50px 0;
+}
+.request__quote p {
+  color: #595858;
+}
+@media (max-width: 760px) {
+  .page__banner {
+    background-size: contain;
+  }
+  .page__banner-content {
+    position: absolute;
+    bottom: 22%;
+  }
+}
+
+.fullscreen-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
+  z-index: 9999; /* Ensure it's on top */
+}

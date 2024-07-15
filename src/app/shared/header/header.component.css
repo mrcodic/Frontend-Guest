@@ -1,0 +1,123 @@
+.footer__one-shape {
+    z-index: 9;
+}
+.menu-overlay__close {
+    z-index: 9999;
+}
+.header__logo {
+    z-index: 9999;
+    position: relative;
+}
+.menu-overlay .accordion {
+    margin-bottom: 20px;
+    z-index: 999;
+    position: sticky;
+}
+
+.menu-overlay .header__logo {
+    margin-bottom: 60px;
+}
+.header {
+    padding-top: 18px;
+    padding-bottom: 25px;
+}
+
+
+
+.header-logo-dark{
+    display: none;
+}
+.sticky-header .header-logo-dark{
+    display: block !important;
+}
+
+.sticky-header .header-logo-light{
+    display: none !important;
+}
+
+.header {
+    /* Header styles */
+    transition: background-color 0.3s ease-in-out;
+}
+
+.header.sticky-header{
+    background-color: #ffff;
+    position: fixed;
+    box-shadow: 0 0 20px 2px #00000029;
+    z-index: 9999;
+}
+.navbar-dark .navbar-toggler {
+    color: rgba(255, 255, 255, .55);
+    border-color: transparent;
+    border: none !important;
+}
+.navbar-toggler:focus {
+    text-decoration: none;
+    outline: 0;
+    box-shadow: none;
+}
+.fixed-top {
+    background-color: transparent !important;
+}
+.offcanvas {
+    background-color: #00463f;
+}
+.navbar-nav {
+    padding: 25px;
+    color: #fff !important;
+}
+.navbar-nav li{
+    padding: 10px 0;
+}
+.navbar-dark .navbar-nav .nav-link {
+    color: rgb(255 255 255);
+    text-transform: uppercase !important;
+}
+.btn-close:focus {
+    outline: 0;
+    box-shadow: none;
+    opacity: 1;
+}
+
+.offcanvas::before {
+    position: absolute;
+    content: "";
+    background-image: url(../../../assets/img/shape/footer-line.svg);
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+.navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover {
+    color: #bd9e55;
+}
+
+.navbar-dark{
+    transition: 0.5s ease;
+}
+.sticky-header{
+    background-color: #fff !important;
+    transition: 0.5s ease;
+    box-shadow: -1px 5px 20px 0px #0000001f;
+}
+.sticky-header .navbar-toggler-icon {
+    filter: invert(1) !important;
+}
+
+.container-language{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.container-language a{
+font-weight: 700;
+color: #fff;
+}
+
+.sticky-header .container-language a{
+    color: #000;
+}

@@ -1,0 +1,83 @@
+<div *ngIf="news?.header" class="page__banner" data-background="assets/img/news/blog-1.jpg" style="background-image: url({{news?.post.image}});">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="page__banner-content">
+                    <span>News</span>
+                    <ul>
+                        <li><a [routerLink]="'/home'">Home</a><span>|</span></li>
+                        <li><a [routerLink]="'/news'">News</a></li>
+                    </ul>
+                    <h1>{{news?.post.title}}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div *ngIf="news?.post" class="news__standard section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-3 col-lg-3 order-last order-lg-first">
+                <div class="all__sidebar">
+                    <div class="all__sidebar-item">
+                      <div class="d-flex flex-row author">
+                        <div class="avatar"><img src="assets/img/team/team-details.jpg" alt="profile-pic"></div>
+                        <div class="full-name"><span>{{news?.post?.author}}</span> <div>Published . {{news?.post?.createdAt | date:'mediumDate'}} </div></div>
+                      </div>
+
+                      <div class="d-flex flex-wrap single-category mt-3">
+                        <div>Category:</div>
+                        <p *ngFor="let cat of news?.post?.mainCategory">{{cat}}</p>
+                      </div>
+                      <div class="d-flex flex-wrap single-category mt-3">
+                        <div>Tags:</div>
+                       <p *ngFor="let tag of news?.post?.tags">{{tag}}</p>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-9 col-lg-9 lg-mb-60">
+                <div class="news__standard-left">
+                    <div class="news__standard-left-item mb-40" >
+                        <div class="news__standard-left-item-content" [innerHTML]="sanitizeHtml(news?.post.content)">
+
+                        </div>
+            </div>
+        </div>
+    </div>
+
+            <!-- Related Posts Area Start -->
+            <div class="blog__one dark__image section-padding" *ngIf="relatedPosts">
+              <div class="container">
+                <div class="row align-items-end mb-70">
+                  <div class="col-xl-7 col-lg-8 lg-mb-30">
+                    <div class="blog__one-title lg-t-center">
+                      <span class="subtitle-one">NEWS</span>
+                      <h2>Related News & Events</h2>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" >
+                  <div class="col-xl-4 col-lg-6 xl-mb-30" *ngFor="let item of relatedPosts">
+                    <div class="blog__one-item">
+                      <div class="blog__one-item-image">
+                        <a [routerLink]="['/news',item?._id]"><img src="{{item?.image}}" alt=""></a>
+                        <div class="blog__one-item-image-date">
+                          <span class="text-three">{{item?.createdAt | date:'yyyy'}}</span>
+                        </div>
+                      </div>
+                      <div class="blog__one-item-content">
+                        <h4><a [routerLink]="['/news',item?._id]">{{item?.title}}</a></h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <!-- Related Posts Area End -->
+
+</div>
+</div>

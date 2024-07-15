@@ -1,0 +1,98 @@
+
+    <div class="page__banner" [style.backgroundImage]="'url(' + header?.image + ')'">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="page__banner-content">
+                        <span>{{header?.label}}</span>
+                        <ul>
+                            <li><a routerLink="/home">Home</a><span>|</span></li>
+                            <li>OUR COMPANIES</li>
+                        </ul>
+                        <h1>{{header?.label}}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services Details Start -->
+    <div class="services__details section-padding">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-8 col-lg-8 lg-mb-60 second-small">
+              <div class="services__details-left">
+                <div class="services__details-left-image dark__image">
+                  <img [src]="currentCompany?.image" alt="">
+                </div>
+                <div class="services__details-left-content">
+                  <h2>{{currentCompany?.name}}</h2>
+                  <p class="mb-25" [innerHTML]="sanitizeHtml(currentCompany?.bio)"></p>
+                </div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div *ngFor="let item of currentCompany?.imageWithLabel" class="col-xl-6 col-md-6 mb-30">
+                    <a [href]="currentCompany?.website">
+                      <div class="project__area-item">
+                        <img [src]="item?.image" alt="">
+                        <div class="project__area-item-content">
+                          <h4><a href="#">{{item?.label}}</a></h4>
+                          <span>{{currentCompany?.name}}</span>
+                        </div>
+                        <div class="project__area-item-icon">
+                          <a [href]="currentCompany?.website"><i class="far fa-arrow-right"></i></a>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="row mt-70">
+                  <div class="col-xl-12 t-center">
+                    <a class="btn-one" [href]="currentCompany?.website">Visit Website<i class="far fa-chevron-double-right"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-4 col-lg-4">
+              <div class="all__sidebar">
+                <div class="all__sidebar-item">
+                  <img [src]="currentCompany?.logo" alt="" class="company-logo">
+                  <h4>Companies</h4>
+                  <div class="all__sidebar-item-solution">
+                    <ul>
+                      <li *ngFor="let company of companies">
+                        <a
+                        [ngClass]="{'active': company._id === activeCompanyId}"
+                         (click)="getCompanyData(company._id)">
+                            {{company.name}}
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="all__sidebar-item">
+                  <h4>Download</h4>
+                  <div class="all__sidebar-item-download">
+                    <ul>
+                      <li><a target="_blank" [href]="currentCompany?.brochuresPdf"><img src="assets/img/icon/pdf.png" alt="">Our Brochures<i class="fal fa-arrow-to-bottom"></i></a></li>
+                      <li><a target="_blank" [href]="currentCompany?.detailsPdf"><img src="assets/img/icon/document.png" alt="">Company Details<i class="fal fa-arrow-to-bottom"></i></a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="all__sidebar-help">
+                  <div class="all__sidebar-help-image">
+                    <img class="img__full" src="{{currentCompany?.supportImage}}" alt="">
+                    <div class="all__sidebar-help-image-content">
+                      <h4>We're Always ready for help You</h4>
+                      <a class="btn-one" [routerLink]="['/contact']">Need Help<i class="far fa-chevron-double-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Services Details End -->

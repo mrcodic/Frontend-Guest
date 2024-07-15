@@ -1,0 +1,66 @@
+    <!-- Dark Light Start -->
+	<div class="switch__tab">
+		<!-- <span class="switch__tab-btn active light-mode-title">Light</span> -->
+		<span class="mode__switch" onclick="darkLight()"><span></span></span>
+		<!-- <span class="switch__tab-btn dark-mode-title">Dark</span> -->
+	</div>
+	<!-- Dark Light End -->
+
+
+
+    <nav class="navbar navbar-dark bg-dark fixed-top" [class.sticky-header]="isScrolled">
+        <div class="container">
+          <a class="navbar-brand" [routerLink]="['/']">
+            <img class="header__logo-img" src="assets/img/logo/logo-black.svg" style="width:160px;">
+          </a>
+          <div class="container-language">
+            <a href="">AR</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+          </div>
+          <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+            <div class="offcanvas-header">
+                <a [routerLink]="['/']" class="header__logo">
+                    <img class="header__logo-img" src="assets/img/logo/logo-black.svg" style="width:160px;">
+                </a>
+              <button type="button" class="btn-close btn-close-white menu-overlay__close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/']" [routerLinkActive]="['active-nav']" [routerLinkActiveOptions]="{exact: true}" (click)="closeOffcanvas()">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a [routerLink]="['about']" [routerLinkActive]="['active-nav']" class="nav-link" (click)="closeOffcanvas()">WHO WE ARE</a>
+                    </li>
+                    <li class="nav-item">
+                        <a [routerLink]="['management']" [routerLinkActive]="['active-nav']" class="nav-link" (click)="closeOffcanvas()">BOARD MEMBER</a>
+                    </li>
+                    <li class="nav-item">
+                        <a [routerLink]="['teams']" [routerLinkActive]="['active-nav']" class="nav-link" (click)="closeOffcanvas()">OUR TEAM</a>
+                    </li>
+                    <li class="nav-item">
+                        <a [routerLink]="['companies']" [routerLinkActive]="['active-nav']" class="nav-link" (click)="closeOffcanvas()">COMPANIES</a>
+                    </li>
+                    <li class="nav-item">
+                        <a [routerLink]="['gallery']" [routerLinkActive]="['active-nav']" class="nav-link" (click)="closeOffcanvas()">GALLERY</a>
+                    </li>
+                    <li class="nav-item">
+                        <a [routerLink]="['news']" [routerLinkActive]="['active-nav']" class="nav-link" (click)="closeOffcanvas()">NEWS & EVENTS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a [routerLink]="['social']" [routerLinkActive]="['active-nav']" class="nav-link" (click)="closeOffcanvas()">Corporate Social Responsibility</a>
+                    </li>
+                    <li class="nav-item">
+                        <a [routerLink]="['career']" [routerLinkActive]="['active-nav']" class="nav-link" (click)="closeOffcanvas()">CAREER</a>
+                    </li>
+                    <li class="nav-item">
+                        <a [routerLink]="['contact']" [routerLinkActive]="['active-nav']" class="nav-link" (click)="closeOffcanvas()">CONTACT US</a>
+                    </li>
+                </ul>
+               </div>
+            </div>
+          </div>
+
+      </nav>

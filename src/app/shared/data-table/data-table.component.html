@@ -1,0 +1,178 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <div style="width: 100%">
+        <p-table
+          [(selection)]="selectedRows"
+          [columns]="cols"
+          styleClass="p-datatable-striped"
+          [value]="data"
+          [paginator]="true"
+          [rows]="15"
+          [showCurrentPageReport]="true"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          [rowsPerPageOptions]="[5, 15, 25, 50]"
+          #dt1
+        >
+          <ng-template pTemplate="caption">
+            <div class="d-flex justify-content-between">
+              <div class="align-self-center">
+                <button
+                  *ngIf="isMainActions"
+                  pButton
+                  pRipple
+                  label="Delete"
+                  icon="fa fa-trash"
+                  class="btn btn-danger me-2 mb-md-0 px-3 text-white"
+                  (click)="deleteMultiple()"
+                ></button>
+                <button
+                  *ngIf="isMainActions"
+                  pButton
+                  pRipple
+                  label="Add"
+                  icon="fa fa-plus"
+                  class="btn btn-success mb-3 add-btn mb-md-0 px-3 text-white"
+                  (click)="actionBtnClicked('add', 'id')"
+                ></button>
+              </div>
+              <span class="p-input-icon-left ml-auto">
+                <input
+                  pInputText
+                  #searchInput
+                  type="text"
+                  (input)="dt1.filterGlobal(searchInput.value, 'contains')"
+                  placeholder="Search keyword"
+                />
+              </span>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th style="width: 4rem">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+              </th>
+              <th
+                [pSortableColumn]="col.field"
+                [ngStyle]="{ maxWidth: 'fitContent' }"
+                class="text-center"
+                *ngFor="let col of columns"
+                style="text-align: center"
+              >
+                {{ col.header }}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </th>
+              <th class="text-center" *ngIf="isActions">Actions</th>
+            </tr>
+          </ng-template>
+          <ng-template
+            pTemplate="body"
+            let-rowData
+            let-columns="columns"
+            let-i="index"
+          >
+            <tr>
+              <td>
+                <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+              </td>
+              <td
+                class="text-center"
+                *ngFor="let col of columns"
+                [ngStyle]="col.style"
+              >
+                <span *ngIf="col.rowType == dataTableRowType.NORMAL">
+                  {{ rowData[col.field] ? rowData[col.field] : "no data" }}
+                </span>
+                <span
+                  *ngIf="col.rowType == dataTableRowType.ENUM"
+                  [ngClass]="col.enumTdObj[rowData[col.field]]"
+                >
+                  {{ rowData[col.field] ? rowData[col.field] : "no data" }}
+                </span>
+                <span *ngIf="col.rowType == dataTableRowType.BOOLEAN">
+                  {{ rowData[col.field] ? "Yes" : "No" }}
+                </span>
+                <span *ngIf="col.rowType == dataTableRowType.DATE">
+                  {{
+                    rowData[col.field]
+                      ? (rowData[col.field] | date : "yyyy-MM-dd")
+                      : "no data"
+                  }}
+                </span>
+                <span
+                  *ngIf="col.rowType == dataTableRowType.ICON"
+                  [ngClass]="col.enumTdObj[rowData[col.field]]"
+                >
+                </span>
+                <span *ngIf="col.rowType == dataTableRowType.IMAGE">
+                  <img
+                    class="img-fluid"
+                    style="max-height: 3rem"
+                    *ngIf="rowData[col.field]"
+                    [src]="rowData[col.field]"
+                    alt="image"
+                  />
+                  <span *ngIf="!rowData[col.field]"> no data</span>
+                </span>
+                <span *ngIf="col.rowType == dataTableRowType.DOWNLOAD">
+                  <a href="{{ rowData[col.field] }}" target="_blank" rel="noopener noreferrer" class="p-ripple p-element p-button p-component p-button-secondary p-button-outlined">Download <i style="margin-left:5px;" class="fas fa-download"></i></a>
+                </span>
+              </td>
+              <td
+                [style]="{
+                  minWidth: conditionalAction[0].isConditionalAction
+                    ? '250px'
+                    : '180px'
+                }"
+                *ngIf="isActions"
+              >
+                <button
+                  *ngIf="isMainActions"
+                  pButton
+                  pRipple
+                  icon="fa fa-eye"
+                  class="btn text-secondary rounded-circle text-center p-0"
+                  (click)="actionBtnClicked('details', rowData._id)"
+                ></button>
+                <button
+                  *ngIf="isMainActions"
+                  pButton
+                  pRipple
+                  icon="fa fa-pencil"
+                  class="btn text-primary edit-btn rounded-circle text-center p-0"
+                  (click)="actionBtnClicked('edit', rowData._id)"
+                ></button>
+                <button
+                  *ngIf="isMainActions"
+                  pButton
+                  pRipple
+                  icon="fa fa-trash"
+                  class="btn text-danger rounded-circle text-center p-0"
+                  (click)="actionBtnClicked('delete', rowData._id)"
+                ></button>
+                <span *ngFor="let action of conditionalAction">
+                  <button
+                    *ngIf="
+                      action.isConditionalAction &&
+                      (action.conditionalByRow?.data
+                        ? action.conditionalByRow?.data! ===
+                          rowData[action?.conditionalByRow?.field!]
+                        : true)
+                    "
+                    pButton
+                    pRipple
+                    [icon]="action.icon"
+                    [ngClass]="action.style"
+                    (click)="
+                      actionBtnClicked(action.actionFunction, rowData._id)
+                    "
+                  ></button>
+                </span>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>

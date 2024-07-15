@@ -1,0 +1,13 @@
+.services__two-item-content-icon img{
+    border-radius: 50%;
+}
+
+@media (max-width: 760px) {
+  .page__banner {
+    background-size: contain;
+  }
+  .page__banner-content {
+    position: absolute;
+    bottom: 22%;
+  }
+}

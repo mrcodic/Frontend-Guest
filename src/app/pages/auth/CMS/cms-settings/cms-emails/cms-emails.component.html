@@ -1,0 +1,219 @@
+<p-toast position="top-right"></p-toast>
+<p-confirmDialog />
+
+<p-tabView>
+    <p-tabPanel header="Sender Emails">
+        <section>
+            <form
+              class=""
+              [formGroup]="senderEmailsForm"
+              (ngSubmit)="onSubmit('senderEmailsForm')"
+            >
+            <div class="my-4 custom-border ps-3 py-3 custom-bg">
+              <div class="d-flex flex-column">
+                <div class="add-border">
+                  <div class="d-flex gap-2 pb-3">
+                    
+                    <!-- fromName -->
+                    <div class="w-50 d-flex flex-column">
+                      <label for="fromName" class="me-2 fw-bold text-dark">
+                        from name
+                      </label>
+                      <input
+                        id="fromName"
+                        pInputText
+                        type="text"
+                        formControlName="fromName"
+                      />
+                    </div>
+                    <!-- fromEmail -->
+                  <div class="w-50 d-flex flex-column">
+                    <label for="fromEmail" class="me-2 fw-bold text-dark">
+                      from email
+                    </label>
+                    <input
+                      id="fromEmail"
+                      pInputText
+                      type="text"
+                      formControlName="fromEmail"
+                    />
+                  </div>
+                  </div>
+                  <div class="d-flex gap-2 pb-3">
+                        <!-- smtpServer -->
+                        <div class="w-50 d-flex flex-column">
+                          <label for="smtpServer" class="me-2 fw-bold text-dark">
+                              SMTP server
+                          </label>
+                          <input
+                            id="smtpServer"
+                            pInputText
+                            type="text"
+                            formControlName="smtpServer"
+                          />
+                        </div>
+                        <!-- port -->
+                        <div class="w-25 d-flex flex-column">
+                          <label for="port" class="me-2 fw-bold text-dark">
+                              port
+                          </label>
+                          <input
+                            id="port"
+                            pInputText
+                            type="text"
+                            formControlName="port"
+                          />
+                        </div>
+                        <!-- securityProtocol -->
+                        <div class="w-70 d-flex flex-column">
+                          <label for="securityProtocol" class="me-2 fw-bold text-dark">
+                              security protocol
+                          </label>
+                          <p-dropdown 
+                           formControlName="securityProtocol" 
+                           [options]="options"
+                           optionLabel="name"
+                           optionValue="value"
+                           placeholder="None" />
+                          
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2 pb-3">
+                    </div>
+                    <div class="d-flex gap-2 pb-3">
+                        <!-- port -->
+                            <!-- smtpUsername -->
+                            <div class="w-50 d-flex flex-column">
+                              <label for="smtpUsername" class="me-2 fw-bold text-dark">
+                                  SMTP Username
+                              </label>
+                              <input
+                                id="smtpUsername"
+                                pInputText
+                                type="text"
+                                formControlName="smtpUsername"
+                              />
+                            </div>
+                            <!-- smtpPassword -->
+                            <div class="w-50 d-flex flex-column">
+                                <label for="smtpPassword" class="me-2 fw-bold text-dark">
+                                    SMTP password
+                                </label>
+                                <input
+                                  id="smtpPassword"
+                                  pInputText
+                                  type="text"
+                                  formControlName="smtpPassword"
+                                />
+                              </div>
+                    </div>
+                    <div class="d-flex gap-2 pb-3">
+                        <p-checkbox 
+                        formControlName="disableCertificateVerification" 
+                        inputId="disableCertificateVerification"
+                        binary="true"
+                         />
+                        <label for="disableCertificateVerification">Disable Certificate Verification</label>
+                    </div>
+                </div>
+              </div>
+        
+            </div>
+            <div class="d-flex gap-2 pb-3 justify-content-end  w-100 ">
+              <button
+                pButton
+                pRipple
+                label="Discard"
+                (click)="reloadPage()"
+                class="btn discard-btn w-25 py-2 px-3 text-white"
+                type="button"
+              ><i class="fa fa-trash-alt me-3"></i></button>
+              <button
+                pButton
+                pRipple
+                label="Confirm"
+                class="btn confirm-btn w-25  py-2 px-3 text-white"
+                type="submit"
+              ><i class="fa fa-check me-3"></i></button>
+            </div>
+            </form>
+        </section>
+    </p-tabPanel>
+    <p-tabPanel header="Reciever Emails">
+        <section>
+            <form [formGroup]="recieverEmailsForm" (ngSubmit)="onSubmit('recieverEmailsForm')">
+              <div class="mb-4 custom-border px-3 py-3 custom-bg">
+                <div class="d-flex justify-content-between">
+                  <!-- <h5 class="mb-2">Category</h5> -->
+                  <button
+                    pButton
+                    pRipple
+                    icon="fa fa-plus"
+                    class="btn text-white bg-success rounded-circle ms-2 d-flex justify-content-center bg-success p-0"
+                    (click)="addForm('recieverEmailsForm', $event)"
+                  ></button>
+                </div>
+                <div formArrayName="recieverEmailsFormArray">
+                  <div *ngFor="let form of getEmailForm.controls; let i = index">
+                    <div [formGroupName]="i" class="border-2 border-bottom p-3">
+                      <div class="container-fluid">
+                        <div class="row">
+                          <div class="col-sm">
+                            <div class="w-50 d-flex flex-column">
+                              <label for="email" class="me-2 fw-bold text-dark">
+                                Email
+                              </label>
+                              <input
+                                id="email"
+                                pInputText
+                                type="text"
+                                formControlName="email"
+                                class="ng-invalid ng-dirty"
+                                class="p-invalid"
+                                required
+                              />
+                            </div>
+                            <div class="add w-100 d-flex mt-4">
+                              <button
+                                (click)="removeForm(i, 'recieverEmailsForm', $event)"
+                                pButton
+                                pRipple
+                                icon="fa fa-trash"
+                                class="btn rounded-circle p-2 custom-alignment text-white shadow d-flex justify-content-center bg-danger p-0"
+                              ></button>
+                              <button
+                                pButton
+                                pRipple
+                                icon="fa fa-plus"
+                                class="btn text-white bg-success rounded-circle ms-2 d-flex justify-content-center bg-success p-0"
+                                (click)="addForm('recieverEmailsForm', $event)"
+                              ></button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="w-100 d-flex justify-content-end">
+                <button
+                  pButton
+                  pRipple
+                  label="Discard"
+                  (click)="reloadPage()"
+                  class="btn btn-warning me-2 mb-md-0 px-3 text-white"
+                  type="submit"
+                ></button>
+                <button
+                  pButton
+                  pRipple
+                  label="Confirm"
+                  class="btn btn-success me-2 mb-md-0 px-3 text-white"
+                  type="submit"
+                ></button>
+              </div>
+            </form>
+          </section>
+    </p-tabPanel>
+</p-tabView>

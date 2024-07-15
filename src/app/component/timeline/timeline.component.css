@@ -1,0 +1,19 @@
+.slide__card h2 {
+    font-size: 40px;
+    line-height: normal;
+    padding: 0;
+    margin: 0;
+    color: #ffffff;
+    font-family: var(--heading-font);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.slide__card p {
+    font-size: 22px;
+    line-height: normal;
+    padding: 0;
+    margin: 0;
+    padding: 12px 0;
+    max-width: 80%;
+    margin: auto;
+}

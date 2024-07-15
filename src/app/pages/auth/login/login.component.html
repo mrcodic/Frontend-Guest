@@ -1,0 +1,94 @@
+<p-progressBar *ngIf="loading" class="progress-bar-position"  mode="indeterminate" [style]="{'height': '8px'}">
+</p-progressBar>
+<div class="container-fluid p-0">
+  <div class="row m-0">
+    <div class="col-12 p-0">
+      <div class="login-card login-dark">
+        <div>
+          <div>
+            <a class="logo" [routerLink]="['/home']">
+              <img
+                class="img-fluid for-light"
+                src="assets/img/login/logo/logo_dark.png"
+                alt="looginpage"
+              />
+            </a>
+          </div>
+          <div class="login-main">
+            <form class="theme-form" [formGroup]="loginForm">
+              <h3>Sign in to account</h3>
+              <p>Enter your email & password to login</p>
+              <div class="form-group">
+                <label class="col-form-label">Email Address</label>
+                <input
+                  class="form-control"
+                  type="email"
+                  required=""
+                  placeholder="app@yourmail.com"
+                  formControlName="email"
+                />
+                @if(loginForm.controls['email'].touched &&
+                loginForm.controls['email'].errors?.['required']){
+                <div class="text text-danger mt-1">Email is required</div>
+                } @if(loginForm.controls['email'].touched &&
+                loginForm.controls['email'].errors?.['email']){
+                <div class="text text-danger mt-1">Invalid Email</div>
+                }
+              </div>
+              <div class="form-group">
+                <label class="col-form-label">Password</label>
+                <div class="form-input position-relative">
+                  <input
+                    class="form-control"
+                    [type]="show ? 'text' : 'password'"
+                    type="password"
+                    name="login[password]"
+                    required=""
+                    placeholder="*********"
+                    formControlName="password"
+                  />
+                  @if(!show){
+                  <div class="show-hide" (click)="showPassword()">
+                    <span class="show"> </span>
+                  </div>
+                  }@else{
+                  <div class="show-hide" (click)="showPassword()">
+                    <span class="Hide"></span>
+                  </div>
+                  } @if(loginForm.controls['password'].touched &&
+                  loginForm.controls['password'].errors?.['required']){
+                  <div class="text text-danger mt-1">Password is required</div>
+                  }
+                </div>
+              </div>
+              <div class="form-group mb-0">
+                <div class="checkbox p-0">
+                  <input id="checkbox1" type="checkbox" />
+                  <label class="ms-1 text-muted" for="checkbox1"
+                    >Remember password</label
+                  >
+                </div>
+                <!-- <a
+                  class="link"
+                  [routerLink]="['/authentication/forgot-password']"
+                  >Forgot password?</a
+                > -->
+                <div class="text-end mt-3">
+                  <button
+                    class="btn btn-primary btn-block w-100"
+                    [disabled]="!loginForm.valid"
+                    (click)="login()"
+                    type="submit"
+                  >
+                    Sign in
+                  </button>
+                </div>
+              </div>
+              <div class="social mt-4"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

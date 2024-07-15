@@ -1,0 +1,50 @@
+
+.owl-carousel.version-1, .owl-carousel.version-2{
+    position: relative;
+}
+.logo-slider-1, .logo-slider-2{
+  width: 100%;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+.owl-carousel .owl-item {
+    background: #fff;
+    padding: 0 20px;
+}
+.owl-nav button {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 30px;
+    height: 30px;
+    background: #fff !important;
+    border-radius: 50%;
+    margin: auto 0;
+    box-shadow: 0px 0px 5px #00000069;
+}
+.owl-nav button.owl-next{
+  right: 0;
+}
+.owl-nav button.owl-prev{
+  left: 0;
+}
+.version-2 h2 {
+    margin: 0px;
+    font-size: 20px;
+}
+.version-2 p {
+    font-size: 15px;
+}
+.version-2 .owl-item{
+  text-align: center;
+  padding: 10px 20px 20px;
+}
+.version-2 .owl-item img{
+  width: 160px;
+  margin: 0 auto;
+}
+.clent-sec{
+  padding-bottom: 0;
+}
+
+

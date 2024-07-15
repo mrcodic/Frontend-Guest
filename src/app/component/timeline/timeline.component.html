@@ -1,0 +1,64 @@
+
+
+<div class="services__one section-padding pt-100">
+
+    <div class="container mb-50">
+        <div class="col-xl-7 col-lg-8 lg-mb-30">
+            <div class="services__one-title lg-t-center">
+                <span class="subtitle-one">History</span>
+                <h2>{{timeLineTitle}}</h2>
+                <p>{{timeLineParagraph}}</p>
+            </div>
+        </div>
+    </div>
+
+    <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+      <div ngxSlickItem class="item slide slide__{{ item.year }}" *ngFor="let item of timeline; let i = index; trackBy: trackByImage">
+        <div class="overlay-slider"></div>
+        <img class="irc_mi timeline-imgs" [src]="item.image" alt="Nature images">
+        <div class="slide__card">
+          <p class="slide__description">{{ item.label }}</p>
+        </div>
+      </div>
+
+      <div class="custom-slick-dots" *ngIf="slickModal?.initialized">
+        <div *ngFor="let item of timeline; let i = index;" class="custom-slick-dot" [class.active]="i === currentSlideIndex" (click)="goToSlide(i)">
+          {{ item.year }}
+        </div>
+      </div>
+    </ngx-slick-carousel>
+
+
+
+
+
+<!-- <div class="slider vertical-slider">
+    <div class="slick">
+
+
+
+      <ng-container *ngFor="let item of timeline">
+
+        <div class="item slide slide__1972">
+            <div class="overlay-slider"></div>
+            <img class="irc_mi"                [src]="item.image"
+
+                alt="Image result for nature images hd">
+            <div class="slide__card">
+
+                    <p class="slide__description">{{item.label}}</p>
+
+            </div>
+        </div>
+
+      </ng-container>
+
+
+
+
+
+    </div>
+</div> -->
+</div>
+
+

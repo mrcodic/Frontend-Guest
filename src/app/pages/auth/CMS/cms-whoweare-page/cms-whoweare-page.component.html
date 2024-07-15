@@ -1,0 +1,547 @@
+<p-toast position="top-right"></p-toast>
+<div class="d-flex justify-content-between">
+  <h6 class="mt-3 mb-3 px-4">Edit {{pageTitle}} Page</h6>
+</div>
+
+<p-tabView>
+  <!-- who we are section -->
+  <p-tabPanel header="Who we are">
+    <form *ngIf="whoweare" class="" [formGroup]="whoweareForm" (ngSubmit)="onSubmit()">
+      <!-- whoweare Section -->
+      <input type="hidden" formControlName="whoweareId">
+      <div class="mb-4 custom-border ps-3 py-3 custom-bg">
+        <!-- <h6 class="mb-2">who we are</h6> -->
+        <div class="container-fluid">
+          <div class="row">
+            <div class="d-flex flex-column py-3 gap-1">
+              <p class="mb-1 fw-bold text-dark mt-2">Hero Slider</p>
+              <div class="w-100 mt-md-0 d-flex align-items-center mb-4 mt-3">
+                <div class="uk-placeholder">
+                  <div class="upload-image-wrapper">
+                    <label class=""> Slider Images <i class="fas fa-cloud-upload-alt"></i></label>
+                    <input type="file"
+                    mode="basic"
+                    (change)="onFileChange($event)"
+                    name="whoweareSlider"
+                    accept="image/*"
+                    multiple
+                    >
+                  </div>
+                </div>
+              <ng-container *ngFor="let img of whoweareForm.get('whoweareSlider')?.value">
+                <p-image
+                class="w-full d-block ms-2"
+                [src]="
+                img.image && !(img.image.startsWith('http')||img.image.startsWith('https'))
+                    ? 'data:image/*;base64,' + img.image
+                    :  img.image
+                "
+                width="100"
+                *ngIf=" whoweareForm.value.whoweareSlider"
+                [preview]="true"
+                >
+                </p-image>
+              </ng-container>
+              </div>
+    
+          </div>
+            <div class="col-sm">
+              <p class="mb-2 language-style">English <b>(LTR)</b></p>
+              <div class="w-50 d-flex flex-column">
+                <label for="whoweareTitle" class="me-2 fw-bold text-dark"> Title </label>
+                <input
+                  id="whoweareTitle"
+                  pInputText
+                  type="text"
+                  formControlName="whoweareTitle"
+                  class="ng-invalid ng-dirty"
+                  class="p-invalid"
+                  required
+                />
+              </div>
+    
+            </div>
+    
+            <div class="col-sm">
+              <p class="mb-2 language-style">Arabic <b>(RTL)</b></p>
+    
+              <div class="w-50 d-flex flex-column">
+                <label for="whoweareTitleAr" class="me-2 fw-bold text-dark">
+                  Title Arabic
+                </label>
+                <input
+                  id="whoweareTitleAr"
+                  pInputText
+                  type="text"
+                  formControlName="whoweareTitleAr"
+                />
+              </div>
+            </div>
+            <div class="d-flex flex-column py-3 gap-4">
+              <div class="w-50 mt-md-0 mt-2 d-flex align-items-center">
+                <div class="uk-placeholder">
+                  <div class="upload-image-wrapper">
+                    <label class=""> Update Images <i class="fas fa-cloud-upload-alt"></i></label>
+                    <input type="file"
+                      mode="basic"
+                      (change)="onFileChange($event)"
+                      name="whoweareImages"
+                      accept="image/*"
+                      multiple
+                      >
+                  </div>
+                </div>
+              <ng-container *ngFor="let img of whoweareForm.get('whoweareImages')?.value">
+                <p-image
+                class="w-full d-block ms-2"
+                [src]="
+                img.image && !(img.image.startsWith('http')||img.image.startsWith('https'))
+                    ? 'data:image/*;base64,' + img.image
+                    :  img.image
+                "
+                width="100"
+                *ngIf=" whoweareForm.value.whoweareImages"
+                [preview]="true"
+                >
+                </p-image>
+              </ng-container>
+              </div>
+    
+          </div>
+    
+    
+        <div class="w-50 mt-2 d-flex flex-column">
+          <label for="whoweareContent" class="me-2 fw-bold text-dark">
+            Content
+          </label>
+          <textarea
+            id="whoweareContent"
+            pInputTextarea
+            type="text"
+            formControlName="whoweareContent"
+          ></textarea>
+        </div>
+    
+          </div>
+          <div class="w-50 mt-2 d-flex flex-column">
+            <label for="whoweareContentAr" class="me-2 fw-bold text-dark">
+              Content Arabic
+            </label>
+            <textarea
+              id="whoweareContentAr"
+              pInputTextarea
+              type="text"
+              formControlName="whoweareContentAr"
+            ></textarea>
+          </div>
+        </div>
+    
+      </div>
+    
+      <div class="my-4 custom-border ps-3 py-3 custom-bg">
+        <h5 class="mb-2">Mission</h5>
+        <div class="d-flex flex-column">
+          <div class="w-50 mt-md-0 mt-2 d-flex align-items-center">
+            <div class="uk-placeholder">
+              <div class="upload-image-wrapper">
+                <label class=""> Update Image <i class="fas fa-cloud-upload-alt"></i></label>
+                <input type="file"
+                mode="basic"
+                (change)="onFileChange($event)"
+                name="missionImage"
+                accept="image/*"
+                >
+              </div>
+            </div>
+            <p-image
+            class="w-full d-block ms-2"
+            [src]="
+            whoweareForm.get('missionImage')?.value && !(whoweareForm.get('missionImage')?.value.startsWith('http')||whoweareForm.get('missionImage')?.value.startsWith('https'))
+                ? 'data:image/*;base64,' + whoweareForm.get('missionImage')?.value
+                :  whoweareForm.get('missionImage')?.value
+            "
+            width="100"
+            *ngIf=" whoweareForm.value.missionImage"
+            [preview]="true"
+            >
+            </p-image>
+          </div>
+          <div class="w-50 my-4 d-flex flex-column">
+            <label for="missionLabel" class="me-2 fw-bold text-dark"> Name </label>
+            <input
+              id="missionLabel"
+              pInputText
+              type="text"
+              formControlName="missionLabel"
+            />
+          </div>
+          <div class="w-50 my-4 d-flex flex-column">
+            <label for="missionLabelAr" class="me-2 fw-bold text-dark">
+              Name Arabic
+            </label>
+            <input
+              id="missionLabelAr"
+              pInputText
+              type="text"
+              formControlName="missionLabelAr"
+            />
+          </div>
+          <div class="w-50 mt-2 d-flex flex-column">
+            <label for="missionContent" class="me-2 fw-bold text-dark">
+              Content
+            </label>
+            <textarea
+              id="missionContent"
+              pInputTextarea
+              type="text"
+              formControlName="missionContent"
+            ></textarea>
+          </div>
+          <div class="w-50 mt-2 d-flex flex-column">
+            <label for="missionContentAr" class="me-2 fw-bold text-dark">
+              Content Arabic
+            </label>
+            <textarea
+              id="missionContentAr"
+              pInputTextarea
+              type="text"
+              formControlName="missionContentAr"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+    
+    
+      <div class="my-4 custom-border ps-3 py-3 custom-bg">
+        <h5 class="mb-2">Vision</h5>
+        <div class="d-flex flex-column">
+          <div class="w-50 mt-md-0 mt-2 d-flex align-items-center">
+            <div class="uk-placeholder">
+              <div class="upload-image-wrapper">
+                <label class=""> Update Image <i class="fas fa-cloud-upload-alt"></i></label>
+                <input type="file"
+                mode="basic"
+                (change)="onFileChange($event)"
+                name="visionImage"
+                accept="image/*"
+                >
+              </div>
+            </div>
+            <p-image
+            class="w-full d-block ms-2"
+            [src]="
+            whoweareForm.get('visionImage')?.value && !(whoweareForm.get('visionImage')?.value.startsWith('http')||whoweareForm.get('visionImage')?.value.startsWith('https'))
+                ? 'data:image/*;base64,' + whoweareForm.get('visionImage')?.value
+                :  whoweareForm.get('visionImage')?.value
+            "
+            width="100"
+            *ngIf=" whoweareForm.value.visionImage"
+            [preview]="true"
+            >
+            </p-image>
+          </div>
+          <div class="w-50 my-4 d-flex flex-column">
+            <label for="visionLabel" class="me-2 fw-bold text-dark"> Name </label>
+            <input
+              id="visionLabel"
+              pInputText
+              type="text"
+              formControlName="visionLabel"
+            />
+          </div>
+          <div class="w-50 my-4 d-flex flex-column">
+            <label for="visionLabelAr" class="me-2 fw-bold text-dark">
+              Name Arabic
+            </label>
+            <input
+              id="visionLabelAr"
+              pInputText
+              type="text"
+              formControlName="visionLabelAr"
+            />
+          </div>
+          <div class="w-50 mt-2 d-flex flex-column">
+            <label for="visionContent" class="me-2 fw-bold text-dark">
+              Content
+            </label>
+            <textarea
+              id="visionContent"
+              pInputTextarea
+              type="text"
+              formControlName="visionContent"
+            ></textarea>
+          </div>
+          <div class="w-50 mt-2 d-flex flex-column">
+            <label for="visionContentAr" class="me-2 fw-bold text-dark">
+              Content Arabic
+            </label>
+            <textarea
+              id="visionContentAr"
+              pInputTextarea
+              type="text"
+              formControlName="visionContentAr"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+    
+      <div class="d-flex justify-content-end">
+        <button
+          pButton
+          pRipple
+          label="Discard"
+          (click)="reloadPage()"
+          class="btn btn-warning me-2 mb-md-0 px-3 text-white"
+          type="button"
+        ></button>
+        <button
+          pButton
+          pRipple
+          label="Confirm"
+          class="btn btn-success me-2 mb-md-0 px-3 text-white"
+          type="submit"
+        ></button>
+      </div>
+    </form>
+  </p-tabPanel>
+  <!-- timeline section -->
+  <p-tabPanel header="Timeline">
+    <!-- timeline header -->
+    <form
+    class=""
+    [formGroup]="timelineHeaderForm"
+    (ngSubmit)="onSubmitHeader('timelineHeaderForm')"
+  >
+    <div class="my-4 custom-border py-3 custom-bg">
+      <!-- <h6 class="mb-2">header</h6> -->
+      <div class="container-fluid">
+        <div class="row">
+          <div class="companies-header d-flex gap-2">
+            <div class="w-50 d-flex flex-column">
+              <label for="title" class="me-2 fw-bold text-dark">
+                Title
+              </label>
+              <input
+                id="title"
+                pInputText
+                type="text"
+                formControlName="title"
+                class="ng-invalid ng-dirty"
+                class="p-invalid"
+                required
+              />
+            </div>
+
+            <div class="w-50 d-flex flex-column">
+              <label for="titleAr" class="me-2 fw-bold text-dark">
+                Title Arabic
+              </label>
+              <input
+                id="titleAr"
+                pInputText
+                type="text"
+                formControlName="titleAr"
+              />
+            </div>
+            </div>
+            <div class="companies-header d-flex gap-2 pt-3">
+            <div class="w-50 d-flex flex-column">
+              <label for="paragraph" class="me-2 fw-bold text-dark">
+                Paragraph
+              </label>
+              <textarea
+                id="paragraph"
+                pInputText
+                type="text"
+                formControlName="paragraph"
+              ></textarea>
+            </div>
+            <div class="w-50 d-flex flex-column">
+              <label for="paragraphAr" class="me-2 fw-bold text-dark">
+                Paragraph Arabic
+              </label>
+              <textarea
+                id="paragraphAr"
+                pInputText
+                type="text"
+                formControlName="paragraphAr"
+              ></textarea>
+            </div>
+          </div>
+        <div class="d-flex gap-2 justify-content-end  w-100 mb-3 pt-3">
+          <button
+            pButton
+            pRipple
+            label="Discard"
+            (click)="reloadPage()"
+            class="btn btn-warning me-2 mb-md-0 px-3 text-white"
+            type="button"
+          >
+          <!-- <i class="fa fa-trash-alt me-3"></i> -->
+        </button>
+          <button
+            pButton
+            pRipple
+            label="Confirm"
+            (click)="onSubmitHeader('timelineHeaderForm')"
+            class="btn btn-success me-2 mb-md-0 px-3 text-white"
+            type="submit"
+          >
+          <!-- <i class="fa fa-check me-3"></i> -->
+        </button>
+        </div>
+        </div>
+      </div>
+    </div>
+    </form>
+    <form class="" [formGroup]="timelineForm" (ngSubmit)="onSubmitTimeline('timelineForm')">
+      <div class="mb-4 custom-border ps-3 py-3 custom-bg">
+        <div class="d-flex pb-2">
+          <!-- <h6 class="mb-2">Timeline</h6> -->
+          <button
+            pButton
+            pRipple
+            icon="fa fa-plus"
+            class="p-2 btn text-white bg-success rounded-circle ms-2 d-flex justify-content-center bg-success p-0"
+            (click)="addForm('timelineForm', $event)"
+          ></button>
+        </div>
+        <div formArrayName="timelineFromArray">
+          <div *ngFor="let form of getTimelineFrom.controls; let i = index">
+            <div [formGroupName]="i" class="border-5 border-top">
+              <input type="hidden" name="_id" formControlName="_id" />
+    
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-sm">
+                    <p class="mb-2 language-style">English <b>(LTR)</b></p>
+                    <div class="w-50 d-flex flex-column">
+                      <label for="label" class="me-2 fw-bold text-dark">
+                        Label
+                      </label>
+                      <input
+                        id="label"
+                        pInputText
+                        type="text"
+                        formControlName="label"
+                        class="ng-invalid ng-dirty"
+                        class="p-invalid"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col-sm">
+                    <p class="mb-2 language-style">Arabic <b>(RTL)</b></p>
+                    <div class="w-50 d-flex flex-column">
+                      <label for="labelAr" class="me-2 fw-bold text-dark">
+                        Label Arabic
+                      </label>
+                      <input
+                        id="labelAr"
+                        pInputText
+                        type="text"
+                        formControlName="labelAr"
+                      />
+                    </div>
+                  </div>
+                  <div class="d-flex flex-column py-3 gap-4">
+                    <div class="w-50 d-flex flex-column">
+                      <label for="year" class="me-2 fw-bold text-dark">
+                        Year
+                      </label>
+                      <input
+                        id="year"
+                        pInputText
+                        type="text"
+                        formControlName="year"
+                      />
+                    </div>
+                  </div>
+                  <div class="d-flex flex-column py-3 gap-4">
+                    <div class="w-50 mt-md-0 mt-2 d-flex align-items-center">
+                      <div class="uk-placeholder">
+                        <div class="upload-image-wrapper">
+                          <label class="">
+                            Update Images <i class="fas fa-cloud-upload-alt"></i
+                          ></label>
+                          <input
+                            type="file"
+                            mode="basic"
+                            (change)="onImageChange($event, i, 'timelineForm')"
+                            name="image"
+                            accept="image/*"
+                          />
+                        </div>
+                      </div>
+                      <p-image
+                        class="w-full d-block ms-2"
+                        [src]="
+                          timelineForm.get('timelineFromArray.' + i + '.image')
+                            ?.value &&
+                          !(
+                            timelineForm
+                              .get('timelineFromArray.' + i + '.image')
+                              ?.value.startsWith('http') ||
+                            timelineForm
+                              .get('timelineFromArray.' + i + '.image')
+                              ?.value.startsWith('https')
+                          )
+                            ? 'data:image/*;base64,' +
+                              timelineForm.get('timelineFromArray.' + i + '.image')
+                                ?.value
+                            : timelineForm.get('timelineFromArray.' + i + '.image')
+                                ?.value
+                        "
+                        width="100"
+                        height="100"
+                        *ngIf="
+                          timelineForm.get('timelineFromArray.' + i + '.image')
+                            ?.value
+                        "
+                      />
+                    </div>
+                    <div class="add w-100 d-flex mt-4">
+                      <button
+                        (click)="removeForm(i, 'timelineForm', $event)"
+                        pButton
+                        pRipple
+                        icon="fa fa-trash"
+                        class="btn rounded-circle p-2 custom-alignment text-white shadow d-flex justify-content-center bg-danger p-0"
+                      ></button>
+                      <button
+                        pButton
+                        pRipple
+                        icon="fa fa-plus"
+                        class="btn text-white bg-success rounded-circle ms-2 d-flex justify-content-center bg-success p-0"
+                        (click)="addForm('timelineForm', $event)"
+                      ></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-end">
+          <button
+            pButton
+            pRipple
+            label="Discard"
+            (click)="reloadPage()"
+            class="btn btn-warning me-2 mb-md-0 px-3 text-white"
+            type="button"
+          ></button>
+          <button
+            pButton
+            pRipple
+            label="Confirm"
+            class="btn btn-success me-2 mb-md-0 px-3 text-white"
+            type="submit"
+          ></button>
+        </div>
+      </div>
+    </form>
+  </p-tabPanel>
+</p-tabView>
+
+

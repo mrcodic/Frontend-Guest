@@ -1,0 +1,180 @@
+<form
+  class="container row justify-content-md-evenly"
+  [formGroup]="formControlFromParent"
+  (ngSubmit)="Confirm()"
+>
+  <!-- [ngClass]="action != input.conditionalAction ? null : 'd-none'" -->
+  <div
+    class="mt-4 col-12"
+    *ngFor="let input of inputs"
+    [ngClass]="{
+      'col-md-12': input.element == 'textEditor',
+      'col-md-6': input.element != 'textEditor',
+      'd-none': action == input.conditionalAction
+    }"
+  >
+    <div
+      *ngIf="action != input.conditionalAction"
+      class="d-flex flex-column p-float-label"
+    >
+      <!-- INPUT -->
+      <input
+        [id]="input.id"
+        pInputText
+        [type]="input.type"
+        [formControlName]="input.formControlName"
+        *ngIf="input.element == 'input'"
+        (input)="
+          input.conditinalFunction
+            ? conditionalOnChange(input.conditinalFunction)
+            : null
+        "
+      />
+      <label *ngIf="input.element == 'input'" [for]="input.id">{{
+        input.placeholder
+      }}</label>
+
+      <!-- DROPDOWN -->
+      <p-dropdown
+        [style]="{ width: '100%' }"
+        [options]="input?.dropdownOpt?.options"
+        [formControlName]="input.formControlName"
+        [placeholder]="input.placeholder"
+        [optionLabel]="input?.dropdownOpt?.optionLabel"
+        [optionValue]="input?.dropdownOpt?.optionValue"
+        [showClear]="false"
+        *ngIf="input.element == 'dropdown'"
+        (onChange)="
+          input.conditinalFunction
+            ? conditionalOnChange(input.conditinalFunction)
+            : null
+        "
+      ></p-dropdown>
+
+      <!-- TEXT EDITOR -->
+     <div *ngIf="input.element == 'textEditor'"
+     >
+     <label class="position-relative" for="{{input.id}}">{{input.placeholder}}</label>
+      <app-rich-text
+      [id]="input.id"
+      [isDisabled]="action == 'details' ? true : false"
+      [richData]="formControlFromParent.get(input.formControlName)?.value"
+      (changeInRichData)="changeInRichData($event, input.formControlName)"
+    ></app-rich-text>
+     </div>
+
+      <!-- CALENDAR -->
+      <p-calendar
+        *ngIf="input.element == 'calendar'"
+        [formControlName]="input.formControlName"
+        dateFormat="dd-mm-yy"
+        [inputId]="input.id"
+        [id]="input.id"
+        (onSelect)="
+          input.conditinalFunction
+            ? conditionalOnChange(input.conditinalFunction)
+            : null
+        "
+      ></p-calendar>
+      <label *ngIf="input.element == 'calendar'" [for]="input.id">{{
+        input.placeholder
+      }}</label>
+
+      <!-- TEXTAREA -->
+      <div *ngIf="input.element == 'textarea'">
+        <label class="position-relative" for="{{input.id}}">{{input.placeholder}}</label>
+        <textarea
+        [rows]="input?.textareaOpt?.rows"
+        [formControlName]="input.formControlName"
+        [cols]="input?.textareaOpt?.cols"
+        pInputTextarea
+
+        (input)="
+          input.conditinalFunction
+            ? conditionalOnChange(input.conditinalFunction)
+            : null
+        "
+      ></textarea>
+      </div>
+      <!-- [autoResize]="true" -->
+      <label *ngIf="input.element == 'textarea'" [for]="input.id">{{
+        input.placeholder
+      }}</label>
+    </div>
+    <!-- MULTI SELECT -->
+    <p-multiSelect
+      [style]="{ width: '100%' }"
+      [options]="input?.dropdownOpt?.options"
+      [formControlName]="input.formControlName"
+      [optionLabel]="input?.dropdownOpt?.optionLabel"
+      [optionValue]="input?.dropdownOpt?.optionValue"
+      [placeholder]="input.placeholder"
+      *ngIf="input.element == 'multiSelect'"
+      (onChange)="
+        input.conditinalFunction
+          ? conditionalOnChange(input.conditinalFunction)
+          : null
+      "
+    ></p-multiSelect>
+    <!-- SWITCH -->
+    <div class="d-flex" *ngIf="input.element == 'switch'">
+      <label class="col-md-10 col-8" [for]="input.id">{{
+        input.placeholder
+      }}</label>
+      <p class="me-2" *ngIf="input.isSwitchLabel">
+        {{
+          input.switchLabel[
+            formControlFromParent.get(input.formControlName)?.value
+          ]
+            ? input.switchLabel[
+                formControlFromParent.get(input.formControlName)?.value
+              ]
+            : input.switchLabel.false
+        }}
+      </p>
+      <p-inputSwitch
+        class="mt-auto col-2"
+        (onChange)="
+          input.conditinalFunction
+            ? conditionalOnChange(input.conditinalFunction)
+            : null
+        "
+        [id]="input.id"
+        [formControlName]="input.formControlName"
+      ></p-inputSwitch>
+    </div>
+
+    <!-- ERROR MESSAGES -->
+    <small
+      *ngIf="
+        isError ||
+        (!formControlFromParent.controls[input.formControlName]?.valid &&
+          formControlFromParent.controls[input.formControlName]?.touched)
+      "
+      class="text-danger"
+    >
+      {{
+        formControlFromParent.get(input.formControlName)?.hasError("required")
+          ? "This field is required"
+          : formControlFromParent
+              .get(input.formControlName)
+              ?.hasError("minlength")
+          ? " Password must be at least 8 characters long."
+          : formControlFromParent
+              .get(input.formControlName)
+              ?.hasError("pattern")
+          ? " bad pattern."
+          : null
+      }}
+    </small>
+  </div>
+
+  <button
+    pButton
+    *ngIf="action != 'details'"
+    pRipple
+    label="Confirm"
+    class="d-block w-full rounded mt-3 text-white save-btn"
+    type="submit"
+  ></button>
+</form>

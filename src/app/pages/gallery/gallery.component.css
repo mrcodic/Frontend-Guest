@@ -1,0 +1,23 @@
+.position-relative-custom{
+    position: relative !important;
+    left: 0 !important;
+    top: 0 !important;
+}
+.row.conbix__filter-active{
+    min-height: 17rem !important;
+    height: auto!important;
+}
+
+.fa-long-arrow-up {
+  color: white;
+}
+
+@media (max-width: 760px) {
+  .page__banner {
+    background-size: contain;
+  }
+  .page__banner-content {
+    position: absolute;
+    bottom: 22%;
+  }
+}

@@ -1,0 +1,43 @@
+.custom-border {
+    border-left: 8px solid #006666;
+    border-radius: 8px;
+  }
+  .custom-bg {
+    background-color: #f6f6f6;
+  }
+  
+  .rounded-circle-custom {
+    border-radius: 50% !important;
+  }
+  
+  .uk-placeholder {
+    border: 1px dashed #6f6f6f;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .upload-image-wrapper {
+    text-align: center;
+    padding: 10px 20px;
+    background: rgb(76 211 217 / 32%);
+    border-radius: 5px;
+    position: relative;
+  }
+  .upload-image-wrapper label {
+    color: #555454;
+    font-size: 0.8rem;
+  }
+  .upload-image-wrapper label i {
+    margin-left: 5px;
+  }
+  .upload-image-wrapper input {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    -webkit-appearance: none;
+    opacity: 0;
+    cursor: pointer;
+    overflow: hidden;
+  }

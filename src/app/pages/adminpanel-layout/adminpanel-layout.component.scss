@@ -1,0 +1,159 @@
+::ng-deep body {
+  background: #efefef;
+}
+::ng-deep .website-viewer {
+  margin-right: 30px;
+  transition: all ease-in-out 0.3s;
+  margin-top: 0px;
+}
+::ng-deep .website-viewer a {
+  background: #046e72;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+::ng-deep .website-viewer:hover {
+  transition: all ease-in-out 0.3s;
+  margin-top: -10px;
+  box-shadow: 8px 27px 80px #121212;
+}
+::ng-deep .website-viewer a i {
+  margin-left: 5px;
+}
+.welcoming h6 {
+  font-weight: 400;
+}
+.welcoming img {
+  width: 40px;
+}
+.welcoming p {
+  font-size: 0.85rem;
+  margin-top: -5px;
+  color: #7a7a7a;
+}
+.top-bar-dashboard:before {
+  position: absolute;
+  content: "";
+  bottom: 0%;
+  height: 1px;
+  z-index: 0;
+  width: calc(100% - 40px);
+  background: #d6d6d7;
+}
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 250px;
+  background: #006666;
+  // background: linear-gradient(305deg, #03a057 0%, #034728 100%);
+  color: #fff;
+  transition: width 0.3s ease;
+  z-index: 1000;
+  overflow-x: hidden;
+  border-radius: 0 20px 20px 0;
+}
+.toggle-btn {
+  display: none;
+}
+.logo-details .img-fluid {
+  width: 58%;
+}
+.collapsed {
+  .toggle-btn {
+    left: 30px;
+  }
+  width: 80px;
+  .logo-details {
+    padding: 10px;
+    border-bottom: 1px solid #f5f5f5;
+  }
+}
+
+.logo-details {
+  padding: 25px;
+}
+
+.toggle-btn {
+  z-index: 250000000;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+.main-content {
+  z-index: 1;
+  // margin-left: 280px;
+  margin-left: 15%;
+  padding: 20px;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar.collapsed + .main-content {
+  margin-left: 80px;
+  width: calc(100vw - 80px);
+}
+
+::ng-deep.p-panelmenu-header-link,
+.p-menuitem,
+.p-submenu-list,
+.p-panelmenu .p-panelmenu-content {
+  background: transparent !important;
+}
+
+::ng-deep .p-panelmenu .p-panelmenu-header-action {
+  background-color: transparent !important;
+  color: rgb(245, 245, 245) !important;
+  font-weight: 500 !important;
+  border: none !important;
+}
+
+::ng-deep .p-panelmenu .p-panelmenu-header-content {
+  background-color: transparent !important;
+  color: rgb(40, 40, 40) !important;
+  border: none !important;
+  padding: 0.5px !important;
+}
+
+::ng-deep .p-panelmenu .p-panelmenu-header-content:hover {
+  transition: all 0.3s ease-in-out;
+  background-color: #125555 !important;
+  color: rgb(255, 255, 255) !important;
+}
+::ng-deep .p-panelmenu-header-action .p-icon-wrapper {
+  order: 3 !important;
+  margin-left: auto;
+}
+::ng-deep
+  .p-panelmenu
+  .p-panelmenu-content
+  .p-menuitem
+  > .p-menuitem-content
+  .p-menuitem-link
+  .p-menuitem-text {
+  font-size: 0.9rem;
+}
+.sidebar.collapsed .nav-list .p-menuitem-text {
+  display: none !important;
+}
+
+.sidebar.collapsed .nav-list .p-menuitem-icon {
+  margin-right: 0 !important;
+}
+
+.sidebar .nav-list .p-menuitem-text {
+  display: inline-block !important;
+}
+
+.sidebar .nav-list .p-menuitem-icon {
+  margin-right: 10px !important;
+}
+
+.userLoginImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+}

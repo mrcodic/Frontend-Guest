@@ -1,0 +1,40 @@
+.full-width-table .p-datatable {
+  width: 100% !important;
+}
+::ng-deep .p-datatable th {
+  max-width: fit-content !important;
+}
+
+::ng-deep .p-datatable td,
+::ng-deep .p-datatable th {
+  padding: 0.7rem !important;
+  margin: 10px !important;
+  text-align: center !important;
+  font-size: 12px;
+}
+::ng-deep .p-datatable th {
+  font-size: 14px;
+  font-weight: bolder;
+}
+::ng-deep .p-datatable td img {
+  border-radius: 6px;
+}
+::ng-deep .p-paginator .p-link {
+  padding: 2px 2px !important;
+  font-size: 0.75rem !important;
+  background-color: transparent !important;
+  color: #1c744c;
+}
+
+::ng-deep .p-paginator {
+  margin-right: 0.5rem !important;
+}
+
+::ng-deep .p-paginator-bottom .p-paginator-current {
+  font-size: 0.75rem !important;
+}
+
+::ng-deep .p-button.p-button-outlined {
+  padding: 0.4rem 1.25rem;
+  font-size: .9rem;
+}

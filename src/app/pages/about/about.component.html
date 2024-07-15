@@ -1,0 +1,172 @@
+<ng-container *ngIf="whoweare">
+
+<div id="carouselExampleInterval" class="carousel slide top-slide" data-bs-ride="carousel">
+  <div class="carousel-inner" style="height:100%;">
+    <div class="carousel-item" *ngFor="let slider of whoweare.sliderImages; let i = index" [class.active]="i === 0" [attr.data-bs-interval]="5000">
+      <img [src]="slider.image" class="d-block w-100 object-fit-cover" alt="..." style="object-fit: cover; object-position: center;">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+
+
+<!-- About Area Start -->
+<div class="about__one dark__image section-padding">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-xl-6 col-lg-6 lg-mb-30">
+				<div class="about__one-left">
+					<div class="about__one-left-image">
+						<img  class="one img-fluid" [src]="whoweare?.images[0].image" alt="">
+						<img class="two img-fluid" [src]="whoweare?.images[1].image" alt="">
+					</div>
+					<div class="about__one-left-experience">
+						<h1><span class="counter">1972</span></h1>
+						<h6>SINCE</h6>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6">
+				<div class="about__one-right">
+					<div class="about__one-right-title">
+						<h2>{{whoweare?.title}}</h2>
+						<p>
+							{{whoweare?.content}}
+						</p>
+					</div>
+					<div class="about__one-right-btn">
+						<div>
+							<a class="btn-one" [routerLink]="['/about']">Discover More<i
+									class="far fa-chevron-double-right"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<img class="about__one-shape-1 dark-n"[src]="aboutus?.image?.image" alt="">
+	</div>
+<!-- About Area End -->
+
+<div class="mission-sec">
+    <div class="container">
+        <div _ngcontent-ng-c2036046135="" class="services__one-title lg-t-center">
+            <span _ngcontent-ng-c2036046135="" class="subtitle-one">COMPANY</span>
+            <h2 _ngcontent-ng-c2036046135="">OUR MISSION & VISION</h2>
+        </div>
+        <nav>
+            <div class="border-0 nav nav-tabs mb-3 justify-content-xs-center" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Mission</button>
+                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Vision</button>
+            </div>
+        </nav>
+    </div>
+    <div *ngIf="whoweare" class="custom-tab-content tab-content p-3" id="nav-tabContent">
+        <div class="tab-pane fade active show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <img src="{{whoweare.mission.image}}" alt="">
+            <div class="text-bx">
+                <h2>{{whoweare.mission.label}}</h2>
+                <p>
+                  {{whoweare.mission.content}}
+                </p>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <img src="{{whoweare.vision.image }}" alt="">
+            <div class="text-bx">
+                <h2>{{whoweare.vision.label}}</h2>
+                <p>
+                  {{whoweare.vision.content}}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <ng-container *ngIf="whoweare.timeline"> -->
+  <div class="timeline-about">
+    <!-- <app-timeline></app-timeline> -->
+
+
+<div class="services__one section-padding pt-100">
+
+  <div class="container mb-50">
+      <div class="col-xl-7 col-lg-8 lg-mb-30">
+          <div class="services__one-title lg-t-center">
+              <span class="subtitle-one">Timeline</span>
+              <h2>{{timeLineTitle}}</h2>
+              <p>{{timeLineParagraph}}</p>
+          </div>
+      </div>
+  </div>
+
+
+  <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+    <div ngxSlickItem class="item slide slide__{{ item.year }}" *ngFor="let item of timeline; let i = index; trackBy: trackByImage">
+      <div class="overlay-slider"></div>
+      <img class="irc_mi timeline-imgs" [src]="item.image" alt="Nature images">
+      <div class="slide__card">
+        <p class="slide__description">{{ item.label }}</p>
+      </div>
+    </div>
+
+    <div class="custom-slick-dots" *ngIf="slickModal?.initialized">
+      <div *ngFor="let item of timeline; let i = index;" class="custom-slick-dot" [class.active]="i === currentSlideIndex" (click)="goToSlide(i)">
+        {{ item.year }}
+      </div>
+    </div>
+  </ngx-slick-carousel>
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="slider vertical-slider">
+  <div class="slick">
+
+
+
+    <ng-container *ngFor="let item of timeline">
+
+      <div class="item slide slide__1972">
+          <div class="overlay-slider"></div>
+          <img class="irc_mi"                [src]="item.image"
+
+              alt="Image result for nature images hd">
+          <div class="slide__card">
+
+                  <p class="slide__description">{{item.label}}</p>
+
+          </div>
+      </div>
+
+    </ng-container>
+
+
+
+
+
+  </div>
+</div> -->
+</div>
+
+
+
+</div>
+<!-- </ng-container> -->
+
+</ng-container>

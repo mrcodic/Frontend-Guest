@@ -1,0 +1,113 @@
+<p-toast position="top-right"></p-toast>
+<form>
+  <div class="add-new-post-container">
+    <h3>Edit Post</h3>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-9">
+          <div class="form-group">
+            <label for="title">Title:</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="blog.title"
+              name="title"
+              id="title"
+              placeholder="Enter post title"
+            />
+          </div>
+          <div class="form-group mt-3">
+            <label for="editor">Content:</label>
+            <p-editor
+              [(ngModel)]="blog.content"
+              name="content"
+              [style]="{ height: '520px' }"
+            ></p-editor>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="d-flex flex-column">
+            <div>
+              <label for="categories">Categories:</label>
+            </div>
+            <div class="w-100">
+              <p-multiSelect
+                [options]="category"
+                optionLabel="name"
+                placeholder="{{ getSelectedCategoryNames(categorySelected) }}"
+                name="categorySelected"
+                (onChange)="onChange($event)"
+              />
+            </div>
+            <div class="w-100" *ngIf="children || childrenSelected">
+              <label for="categories">Children:</label>
+              <p-multiSelect
+                [options]="children"
+                optionLabel="name"
+                placeholder="{{ getSelectedItemsNames(childrenSelected, children) || 'Select Children' }}"
+                (onChange)="onChangeChildren($event)"
+              />
+            </div>
+          </div>
+          <div class="form-group mt-3">
+            <label for="tags">Tags:</label>
+            <p-multiSelect
+              [options]="tags"
+              optionLabel="name"
+              (onChange)="onChangeTags($event)"
+              name="selectedTags"
+              placeholder="{{ getSelectedItemsNames(selectedTags, tags) || 'Select Tags' }}"
+            />
+          </div>
+          <div class="form-group mt-3">
+            <label for="featured-image">Featured Image:</label>
+            <div class="js-upload uk-placeholder uk-text-center">
+              <div class="upload-image-wrapper">
+                <input
+                  type="file"
+                  accept="image/*"
+                  (change)="onFileChange($event)"
+                />
+                <span class="uk-link"
+                  >Select Featured Image <i class="fas fa-upload mx-3"></i
+                ></span>
+              </div>
+              <p-image
+                *ngIf="image"
+                [src]="image"
+              ></p-image>
+            </div>
+          </div>
+          <div class="form-group mt-3">
+            <label for="excerpt">Excerpt (optional):</label>
+            <textarea
+              class="form-control"
+              [(ngModel)]="excerpt"
+              name="excerpt"
+              id="excerpt"
+              maxlength="240"
+              rows="1"
+              placeholder="Enter post excerpt up to 240 character..."
+            ></textarea>
+          </div>
+          <div class="submit-btns mt-3">
+            <button
+              type="submit"
+              (click)="onSubmit('publish')"
+              class="btn w-100 btn-primary"
+            >
+              Publish <i class="fas fa-check"></i>
+            </button>
+            <button
+              type="submit"
+              (click)="onSubmit('draft')"
+              class="btn btn-secondary ms-0 w-100"
+            >
+              Save as draft <i class="far fa-bookmark"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

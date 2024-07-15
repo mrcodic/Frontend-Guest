@@ -1,0 +1,45 @@
+.page__banner-content h1 {
+    color: var(--text-white);
+    font-size: 50px;
+    line-height: normal;
+    margin-top: 10px;
+    max-width: 600px;
+}
+.page__banner-content {
+  width: max-content;
+}
+.page__banner {
+  background-size: cover;
+  background-position: bottom;
+}
+.input-group-append {
+    cursor: pointer;
+  }
+  input[type=text], input[type=email], input[type=url], input[type=password], input[type=search], input[type=number], input[type=tel], input[type=range], input[type=date], input[type=month], input[type=week], input[type=time], input[type=datetime], input[type=datetime-local], input[type=color], textarea {
+    height: 40px;
+    border-radius: 0;
+}
+@media (max-width: 760px) {
+  .second-small {
+    order:2;
+  }
+}
+
+::ng-deep p-calendar{
+  display: flex;
+  height: 50%;
+}
+
+::ng-deep p-calendar .p-inputtext{
+  height: 100%;
+}
+
+:host ::ng-deep .p-datepicker{
+  top: -200px !important;
+}
+
+:host ::ng-deep .p-datepicker-year, :host ::ng-deep .p-datepicker-month{
+  padding: .5rem 1rem;
+  font-size: .875rem;
+  margin: 0.5rem;
+}

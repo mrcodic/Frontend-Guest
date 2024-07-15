@@ -1,0 +1,104 @@
+<p-progressBar
+  *ngIf="loading"
+  class="progress-bar-position"
+  mode="indeterminate"
+  [style]="{ height: '8px' }"
+>
+</p-progressBar>
+<div class="">
+  <div class="row">
+    <div class="col-md-2 sidebar" [ngClass]="{ collapsed: collapsed }">
+      <div class="logo-details d-flex flex-column">
+        <button class="toggle-btn" (click)="toggleCollapse()">
+          <i
+            class="fa fa-bars text-light"
+            [class.bx-menu]="!collapsed"
+            [class.bx-menu-alt-right]="collapsed"
+          ></i>
+        </button>
+        <img
+          src="../../../assets/img/logo/logo-white.svg"
+          alt=""
+          class="img-fluid"
+        />
+      </div>
+      <p-panelMenu class="nav-list" [model]="items"></p-panelMenu>
+    </div>
+    <div class="col-md-10 main-content">
+      <nav class="navbar rounded navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid top-bar-dashboard">
+          <div class="welcoming">
+            <h6 class="d-inline-block">Welcome {{ userName }}</h6>
+            <img
+              class="d-inline-block"
+              src="../../assets/img/hand.gif"
+              alt="welcoming"
+            />
+            <p>Here’s what’s happening with your website today.</p>
+          </div>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="website-viewer ms-auto">
+              <a target="_blank" href="https://al-khaldi.com.sa/"
+                >View Website <i class="far fa-eye"></i
+              ></a>
+            </div>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle text-dark fw-bold"
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <img
+                    [src]="
+                      userImage
+                        ? userImage
+                        : '../../../assets/img/logo/logo-black.svg'
+                    "
+                    class="userLoginImage me-2"
+                    alt="user-Login-Image"
+                  />
+                  <span class="text-secondary">{{ userRole }}</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <!-- added dropdown-menu-end class here -->
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      routerLink="/authentication/adminpanel/profile"
+                      >Edit Profile</a
+                    >
+                  </li>
+                  <li>
+                    <button
+                      class="dropdown-item"
+                      (click)="logoutFunction()"
+                      routerLink="/authentication/login"
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

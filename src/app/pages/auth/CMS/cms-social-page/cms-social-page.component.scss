@@ -1,0 +1,19 @@
+.custom-border {
+  border-left: 8px solid #006666;
+  border-radius: 8px;
+}
+.custom-bg {
+  background-color: #f6f6f6;
+}
+
+.rounded-circle-custom {
+  border-radius: 50% !important;
+}
+
+::ng-deep .p-datatable-header .align-self-center .btn-danger{
+  display: none;
+}
+
+::ng-deep .ng-star-inserted .text-secondary{
+  display: none;
+}

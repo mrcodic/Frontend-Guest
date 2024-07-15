@@ -1,0 +1,112 @@
+<p-toast position="top-right"></p-toast>
+<div *ngIf="isLoading" class="fullscreen-loader">
+    <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
+</div>
+<div class="page__banner" data-background="assets/img/career/career-banner.jpg" style="background-image: url(assets/img/career/career-banner.jpg);">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="page__banner-content">
+                    <span>Career</span>
+                    <ul>
+                        <li><a routerLink="/home">Home</a><span>|</span></li>
+                        <li>Career</li>
+                    </ul>
+                    <h1>Career Form</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Request Quote Page Start -->
+    <div class="request__quote career-p">
+        <div class="container">
+            <div class="row p-3">
+                <div class="col-12">
+                    <h2>{{title}}</h2>
+                </div>
+                <div class="col-9 pt-3 pb-5">
+                    <p>{{paragraph}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <form [formGroup]="careerForm" (ngSubmit)="onSubmit()" >
+                        <div class="row">
+							<div class="col-md-6 mb-30">
+                                <div class="request__quote-item">
+                                    <label>Name<span> *</span></label>
+									<input formControlName="firstName"
+                                    type="text" name="name" placeholder="First" required>
+								</div>
+							</div>
+							<div class="col-md-6 mt-30 md-mt-0 lg-mb-30">
+								<div class="request__quote-item">
+									<input formControlName="lastName"
+                                    type="text" name="name" placeholder="Last" required>
+								</div>
+							</div>
+							<div class="col-md-6 mb-30">
+								<div class="request__quote-item">
+									<label>Email Address<span> *</span></label>
+									<input formControlName="email"
+                                    type="email" name="email" placeholder="email" required>
+								</div>
+							</div>
+							<div class="col-md-6 lg-mb-30">
+								<div class="request__quote-item">
+									<label>Number<span> *</span></label>
+									<input formControlName="phoneNumber"
+                                    type="number" name="number"required>
+								</div>
+							</div>
+							<!-- <div class="col-md-6 mb-30">
+								<div class="request__quote-item">
+									<label>Location<span> *</span></label>
+									<input type="text" required>
+								</div>
+							</div> -->
+							<!-- <div class="col-md-6 lg-mb-30">
+								<div class="request__quote-item">
+									<label>Portfolio<span> *</span></label>
+									<input type="text" value="https://" required>
+								</div>
+							</div> -->
+                            <div class="col-md-12 mb-30">
+								<div class="request__quote-item">
+									<label>Job Message<span> *</span></label>
+                                    <textarea formControlName="message"
+                                    name="message"></textarea>
+								</div>
+                            </div>
+                            <div class="col-md-12 mb-30">
+                                <div class="request__quote-item">
+                                    <label>Upload CV<span> *</span></label>
+                                    <div class="file-upload">
+                                        <div class="file-select">
+                                          <div class="file-select-button" id="fileName">Choose File</div>
+                                          <div class="file-select-name" id="noFile">No file chosen...</div>
+
+                                          <input (change)="onFileSelected($event)" accept=".pdf"  type="file" name="chooseFile" id="chooseFile">
+                                        </div>
+                                      </div>
+								</div>
+                            </div>
+                            <ngx-recaptcha2 #captchaElem
+                            [siteKey]="siteKey"
+                            formControlName="recaptcha">
+                          </ngx-recaptcha2>
+                            <div class="col-lg-12 mt-3 d-flex justify-content-end">
+                                <button class="btn-one mt-30" type="submit">Submit <i class="far fa-chevron-double-right"></i></button>
+                                <!-- <p-progressSpinner *ngIf="isLoading" ariaLabel="loading"></p-progressSpinner> -->
+                            </div>
+
+						</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Request Quote Page End -->

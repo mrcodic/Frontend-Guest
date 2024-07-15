@@ -1,0 +1,308 @@
+<p-toast position="top-right"></p-toast>
+<div class="d-flex justify-content-between">
+  <h6 class="mt-3 mb-3 px-4">Edit {{ pageTitle }} Page</h6>
+</div>
+<form *ngIf="board" class="" [formGroup]="boardForm" (ngSubmit)="onSubmit()">
+  <!-- Header Section -->
+  <input type="hidden" formControlName="headerId" />
+  <div class="mb-4 custom-border ps-3 py-3 custom-bg">
+    <h6 class="mb-2">header</h6>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm">
+          <p class="mb-2 language-style">English <b>(LTR)</b></p>
+          <div class="w-50 d-flex flex-column">
+            <label for="headerLabel" class="me-2 fw-bold text-dark">
+              Label
+            </label>
+            <input
+              id="headerLabel"
+              pInputText
+              type="text"
+              formControlName="headerLabel"
+              class="ng-invalid ng-dirty"
+              class="p-invalid"
+              required
+            />
+          </div>
+          <div class="d-flex flex-column py-3 gap-4">
+            <div class="w-50 mt-md-0 mt-2 d-flex align-items-center">
+              <div class="uk-placeholder">
+                <div class="upload-image-wrapper">
+                  <label class=""> Update Image <i class="fas fa-cloud-upload-alt"></i></label>
+                  <input
+                    type="file"
+                    mode="basic"
+                    (change)="onFileChange($event)"
+                    name="headerImage"
+                    accept="image/*"
+                  />
+                </div>
+              </div>
+
+              <p-image
+                class="w-full d-block ms-2"
+                [src]="
+                  boardForm.get('headerImage')?.value &&
+                  !(
+                    boardForm.get('headerImage')?.value.startsWith('http') ||
+                    boardForm.get('headerImage')?.value.startsWith('https')
+                  )
+                    ? 'data:image/*;base64,' +
+                      boardForm.get('headerImage')?.value
+                    : boardForm.get('headerImage')?.value
+                "
+                width="100"
+                *ngIf="boardForm.value.headerImage"
+                [preview]="true"
+              >
+              </p-image>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm">
+          <p class="mb-2 language-style">Arabic <b>(RTL)</b></p>
+
+          <div class="w-50 d-flex flex-column">
+            <label for="headerLabelAr" class="me-2 fw-bold text-dark">
+              Label Arabic
+            </label>
+            <input
+              id="headerLabelAr"
+              pInputText
+              type="text"
+              formControlName="headerLabelAr"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Header Section -->
+
+  <!-- Message Section -->
+  <div class="my-4 custom-border ps-3 py-3 custom-bg">
+    <h5 class="mb-2">Message</h5>
+    <div class="d-flex flex-column">
+      <div class="w-50 mt-md-0 mt-2 d-flex align-items-center">
+        <div class="uk-placeholder">
+          <div class="upload-image-wrapper">
+            <label class=""> Update Image <i class="fas fa-cloud-upload-alt"></i></label>
+            <input
+              type="file"
+              mode="basic"
+              (change)="onFileChange($event)"
+              name="messageImage"
+              accept="image/*"
+            />
+          </div>
+        </div>
+        <p-image
+          class="w-full d-block ms-2"
+          [src]="
+            boardForm.get('messageImage')?.value &&
+            !(
+              boardForm.get('messageImage')?.value.startsWith('http') ||
+              boardForm.get('messageImage')?.value.startsWith('https')
+            )
+              ? 'data:image/*;base64,' + boardForm.get('messageImage')?.value
+              : boardForm.get('messageImage')?.value
+          "
+          width="100"
+          *ngIf="boardForm.value.messageImage"
+          [preview]="true"
+        >
+        </p-image>
+      </div>
+      <div class="w-50 my-4 d-flex flex-column">
+        <label for="messageName" class="me-2 fw-bold text-dark"> Name </label>
+        <input
+          id="messageName"
+          pInputText
+          type="text"
+          formControlName="messageName"
+        />
+      </div>
+      <div class="w-50 my-4 d-flex flex-column">
+        <label for="messageNameAr" class="me-2 fw-bold text-dark">
+          Name Arabic
+        </label>
+        <input
+          id="messageNameAr"
+          pInputText
+          type="text"
+          formControlName="messageNameAr"
+        />
+      </div>
+      <div class="w-50 mt-2 d-flex flex-column">
+        <label for="messageContent" class="me-2 fw-bold text-dark">
+          Content
+        </label>
+        <textarea
+          id="messageContent"
+          pInputTextarea
+          type="text"
+          formControlName="messageContent"
+        ></textarea>
+      </div>
+      <div class="w-50 mt-2 d-flex flex-column">
+        <label for="messageContentAr" class="me-2 fw-bold text-dark">
+          Content Arabic
+        </label>
+        <textarea
+          id="messageContentAr"
+          pInputTextarea
+          type="text"
+          formControlName="messageContentAr"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- End Message Section -->
+
+  <!-- Members Section -->
+  <div class="my-4 custom-border ps-3 py-3 custom-bg">
+    <div class="d-flex justify-content-between">
+      <h5>Members</h5>
+    </div>
+
+    <div formArrayName="members" *ngIf="members">
+      <div
+        class="mt-4"
+        *ngFor="let member of members.controls; let i = index"
+        [class.move-transition]="isMoving"
+        [style.transform]="getTransform(i)"
+      >
+        <div [formGroupName]="i" class="row">
+          <input type="hidden" name="id" formControlName="_id" />
+          <div class="col-sm">
+            <div class="d-flex justify-content-center">
+              <div class="services__two-arrow t-right sm-t-center pl-10">
+                <div class="services__two-arrow-prev swiper-button-prev" (click)="moveUp(i)">
+                  <i class="fal fa-long-arrow-up"></i>
+                </div>
+                <div class="services__two-arrow-next swiper-button-next" (click)="moveDown(i)">
+                  <i class="fal fa-long-arrow-down"></i>
+                </div>
+              </div>
+            </div>
+            <div class="w-25 d-flex flex-column">
+
+              <label [for]="i" class="mx-2 fw-bold text-dark"> Name </label>
+              <input [id]="i" pInputText type="text" formControlName="name" />
+            </div>
+            <div class="w-25 d-flex flex-column pt-2">
+              <label [for]="i + 'ar'" class="mx-3 fw-bold text-dark">
+                Name Arabic
+              </label>
+              <input
+                [id]="i + 'ar'"
+                pInputText
+                type="text"
+                formControlName="nameAr"
+              />
+            </div>
+            <!-- role -->
+            <div class="w-50 d-flex flex-column pt-2">
+              <label [for]="i " class="mx-3 fw-bold text-dark">
+                Role
+              </label>
+              <input
+                [id]="i "
+                pInputText
+                type="text"
+                formControlName="role"
+              />
+            </div>
+            <!-- role ar -->
+            <div class="w-50 d-flex flex-column pt-2">
+              <label [for]="i + 'ar'" class="mx-3 fw-bold text-dark">
+                Role Arabic
+              </label>
+              <input
+                [id]="i + 'ar'"
+                pInputText
+                type="text"
+                formControlName="roleAr"
+              />
+            </div>
+          </div>
+          <div class="d-flex flex-column py-3 gap-4">
+            <div class="w-50 mt-md-0 mt-2 d-flex align-items-center">
+              <div class="uk-placeholder">
+                <div class="upload-image-wrapper">
+                  <label class=""> Update Images <i class="fas fa-cloud-upload-alt"></i></label>
+                  <input
+                    type="file"
+                    mode="basic"
+                    (change)="onFileChange($event, i)"
+                    name="images"
+                    accept="image/*"
+                    multiple
+                  />
+                </div>
+              </div>
+            <ng-container *ngFor="let img of member.get('images')?.value">
+              <p-image
+                class="w-full d-block ms-2"
+                [src]="
+                  img.image &&
+                  !(
+                    img.image.startsWith('http') ||
+                    img.image.startsWith('https')
+                  )
+                    ? 'data:image/*;base64,' + img.image
+                    : img.image
+                "
+                width="100"
+                [preview]="true"
+              >
+              </p-image>
+            </ng-container>
+            </div>
+
+            <div></div>
+          </div>
+          <div class="add w-100 d-flex mt-4 pb-100">
+            <button
+              (click)="removeMember(i)"
+              pButton
+              pRipple
+              icon="fa fa-trash"
+              class="btn rounded-circle p-2 custom-alignment text-white shadow d-flex justify-content-center bg-danger p-0"
+            ></button>
+            <button
+              pButton
+              pRipple
+              icon="fa fa-plus"
+              class="btn text-white bg-success rounded-circle ms-2 d-flex justify-content-center bg-success p-0"
+              (click)="addMember()"
+            ></button>
+          </div>
+          </div>
+        <hr />
+      </div>
+    </div>
+  </div>
+  <!-- end Member Section -->
+  <div class="d-flex justify-content-end">
+    <button
+      pButton
+      pRipple
+      label="Discard"
+      (click)="reloadPage()"
+      class="btn btn-warning me-2 mb-md-0 px-3 text-white"
+      type="button"
+    ></button>
+    <button
+      pButton
+      pRipple
+      [disabled]="disableButton"
+      label="Confirm"
+      class="btn btn-success me-2 mb-md-0 px-3 text-white"
+      type="submit"
+    ></button>
+  </div>
+</form>
